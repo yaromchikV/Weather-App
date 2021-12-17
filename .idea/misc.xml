@@ -19,13 +19,13 @@
         <entry key="..\:/RS-School/WeatherApp/app/src/main/res/layout/activity_weather.xml" value="0.176" />
         <entry key="..\:/RS-School/WeatherApp/app/src/main/res/layout/day_item.xml" value="1.35" />
         <entry key="..\:/RS-School/WeatherApp/app/src/main/res/layout/fragment_dashboard.xml" value="0.25416666666666665" />
-        <entry key="..\:/RS-School/WeatherApp/app/src/main/res/layout/fragment_forecast.xml" value="0.176" />
+        <entry key="..\:/RS-School/WeatherApp/app/src/main/res/layout/fragment_forecast.xml" value="0.152" />
         <entry key="..\:/RS-School/WeatherApp/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
         <entry key="..\:/RS-School/WeatherApp/app/src/main/res/layout/fragment_notifications.xml" value="0.25416666666666665" />
         <entry key="..\:/RS-School/WeatherApp/app/src/main/res/layout/fragment_weather.xml" value="0.176" />
         <entry key="..\:/RS-School/WeatherApp/app/src/main/res/layout/ic_arrow.xml" value="0.16486486486486487" />
-        <entry key="..\:/RS-School/WeatherApp/app/src/main/res/layout/item_day.xml" value="0.2" />
-        <entry key="..\:/RS-School/WeatherApp/app/src/main/res/layout/item_weather.xml" value="0.264" />
+        <entry key="..\:/RS-School/WeatherApp/app/src/main/res/layout/item_day.xml" value="0.176" />
+        <entry key="..\:/RS-School/WeatherApp/app/src/main/res/layout/item_weather.xml" value="0.176" />
         <entry key="..\:/RS-School/WeatherApp/app/src/main/res/layout/weather_item.xml" value="0.16052631578947368" />
         <entry key="..\:/RS-School/WeatherApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
       </map>

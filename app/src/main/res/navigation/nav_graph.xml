@@ -16,4 +16,5 @@
         android:name="com.yaromchikv.weatherapp.ui.forecast.ForecastFragment"
         android:label="@string/title_forecast"
         tools:layout="@layout/fragment_forecast" />
+
 </navigation>
