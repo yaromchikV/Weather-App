@@ -2,4 +2,6 @@
     <string name="app_name">Weather App</string>
     <string name="title_weather">Weather</string>
     <string name="title_forecast">Forecast</string>
+    <string name="today">Today</string>
+    <string name="share">Share</string>
 </resources>

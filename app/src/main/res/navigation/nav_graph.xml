@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_weather"
-        android:name="com.yaromchikv.weatherapp.ui.home.WeatherFragment"
+        android:name="com.yaromchikv.weatherapp.ui.weather.WeatherFragment"
         android:label="@string/title_weather"
         tools:layout="@layout/fragment_weather" />
 
     <fragment
         android:id="@+id/navigation_forecast"
-        android:name="com.yaromchikv.weatherapp.ui.dashboard.ForecastFragment"
+        android:name="com.yaromchikv.weatherapp.ui.forecast.ForecastFragment"
         android:label="@string/title_forecast"
         tools:layout="@layout/fragment_forecast" />
 </navigation>
