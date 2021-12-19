@@ -9,15 +9,24 @@ import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.yaromchikv.weatherapp.R
 import com.yaromchikv.weatherapp.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity(R.layout.activity_main), MainContract.View {
 
     private val binding: ActivityMainBinding by viewBinding(R.id.container)
+
+    @Inject
+    lateinit var presenter: MainContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        presenter.onCreate()
+    }
 
+    override fun setupBottomNavigation() {
         val navController = findNavController(R.id.fragment_container)
         val appBarConfiguration = AppBarConfiguration(
             setOf(R.id.navigation_weather, R.id.navigation_forecast)

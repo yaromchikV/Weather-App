@@ -12,7 +12,7 @@ import dagger.hilt.android.components.FragmentComponent
 
 @InstallIn(FragmentComponent::class)
 @Module
-abstract class ForecastContractModule {
+abstract class ForecastModule {
 
     @Binds
     abstract fun bindFragment(fragment: ForecastFragment): ForecastContract.View
@@ -24,7 +24,7 @@ abstract class ForecastContractModule {
 
 @InstallIn(FragmentComponent::class)
 @Module
-object ForecastModule {
+object ForecastFragmentModule {
 
     @Provides
     fun bindFragment(fragment: Fragment): ForecastFragment {
