@@ -1,4 +1,4 @@
-package com.yaromchikv.weatherapp.di
+package com.yaromchikv.weatherapp.di.forecast
 
 import androidx.fragment.app.Fragment
 import com.yaromchikv.weatherapp.ui.forecast.ForecastContract
@@ -20,14 +20,4 @@ abstract class ForecastModule {
     @Binds
     abstract fun bindPresenter(presenter: ForecastPresenter): ForecastContract.Presenter
 
-}
-
-@InstallIn(FragmentComponent::class)
-@Module
-object ForecastFragmentModule {
-
-    @Provides
-    fun bindFragment(fragment: Fragment): ForecastFragment {
-        return fragment as ForecastFragment
-    }
 }

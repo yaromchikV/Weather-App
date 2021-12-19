@@ -1,4 +1,4 @@
-package com.yaromchikv.weatherapp.di
+package com.yaromchikv.weatherapp.di.main
 
 import android.app.Activity
 import com.yaromchikv.weatherapp.ui.MainActivity
@@ -22,12 +22,3 @@ abstract class MainModule {
 
 }
 
-@InstallIn(ActivityComponent::class)
-@Module
-object MainActivityModule {
-
-    @Provides
-    fun bindActivity(activity: Activity): MainActivity {
-        return activity as MainActivity
-    }
-}
