@@ -27,6 +27,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), MainContract.Vie
     }
 
     override fun setupBottomNavigation() {
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
         val navController = findNavController(R.id.fragment_container)
         val appBarConfiguration = AppBarConfiguration(
             setOf(R.id.navigation_weather, R.id.navigation_forecast)

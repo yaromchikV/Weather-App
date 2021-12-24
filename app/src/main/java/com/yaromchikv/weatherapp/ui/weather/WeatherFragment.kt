@@ -23,6 +23,6 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), WeatherContract.Vie
     }
 
     override fun showWelcomeMessage(welcomeMessage: String) {
-        TODO("Not yet implemented")
+        //binding.welcomeMessageTitle.text = welcomeMessage.title
     }
 }

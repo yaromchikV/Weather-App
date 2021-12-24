@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.yaromchikv.weatherapp.databinding.ItemDayBinding
 import com.yaromchikv.weatherapp.databinding.ItemWeatherBinding
+import com.yaromchikv.weatherapp.domain.model.forecast.Forecast
 import javax.inject.Singleton
 
 @Singleton
@@ -45,7 +46,7 @@ class ForecastRVAdapter : ListAdapter<Any, ForecastRVAdapter.ItemViewHolder>(DIF
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (getItem(position) is TransactionView) WEATHER_VIEW_TYPE else DAY_VIEW_TYPE
+        return if (getItem(position) is Forecast) WEATHER_VIEW_TYPE else DAY_VIEW_TYPE
     }
 
     inner class WeatherViewHolder(
@@ -53,7 +54,7 @@ class ForecastRVAdapter : ListAdapter<Any, ForecastRVAdapter.ItemViewHolder>(DIF
     ) : ItemViewHolder(binding.root) {
 
         override fun bind(item: Any) {
-            val transactionView = item as TransactionView
+            val forecast = item as Forecast
             with(binding) {
                 //
             }
@@ -78,15 +79,15 @@ class ForecastRVAdapter : ListAdapter<Any, ForecastRVAdapter.ItemViewHolder>(DIF
             override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
                 return if (oldItem is String && newItem is String)
                     oldItem == newItem
-                else if (oldItem is TransactionView && newItem is TransactionView)
-                    oldItem.id == newItem.id
+                else if (oldItem is Forecast && newItem is Forecast)
+                    oldItem.datetime == newItem.datetime
                 else false
             }
 
             override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
                 return if (oldItem is String && newItem is String)
                     oldItem.hashCode() == newItem.hashCode()
-                else if (oldItem is TransactionView && newItem is TransactionView)
+                else if (oldItem is Forecast && newItem is Forecast)
                     oldItem.hashCode() == newItem.hashCode()
                 else false
             }
