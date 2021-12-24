@@ -37,4 +37,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), MainContract.Vie
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNavigation.setupWithNavController(navController)
     }
+
+    override fun changeToolbarTitle(text: String) {
+        binding.header.text = text
+    }
 }

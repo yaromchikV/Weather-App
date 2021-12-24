@@ -7,7 +7,8 @@ class ForecastPresenter @Inject constructor(
 ): ForecastContract.Presenter {
 
     override fun onViewCreated() {
-        val welcomeMessage = "message"
-        view.showWelcomeMessage(welcomeMessage)
+        val weather = "message"
+        view.updateToolbarTitle(weather)
+        view.showWelcomeMessage(weather)
     }
 }

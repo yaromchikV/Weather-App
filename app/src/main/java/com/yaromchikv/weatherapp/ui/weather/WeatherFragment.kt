@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.yaromchikv.weatherapp.R
 import com.yaromchikv.weatherapp.databinding.FragmentWeatherBinding
+import com.yaromchikv.weatherapp.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -20,9 +21,13 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), WeatherContract.Vie
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.onViewCreated()
+
+        binding.shareButton.setOnClickListener {
+            presenter.onShareButtonClicked()
+        }
     }
 
-    override fun showWelcomeMessage(welcomeMessage: String) {
+    override fun showWeather(weather: String) {
         //binding.welcomeMessageTitle.text = welcomeMessage.title
     }
 }

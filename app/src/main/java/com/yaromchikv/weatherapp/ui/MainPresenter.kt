@@ -4,9 +4,13 @@ import javax.inject.Inject
 
 class MainPresenter @Inject constructor(
     private val view: MainContract.View
-): MainContract.Presenter {
+) : MainContract.Presenter {
 
     override fun onCreate() {
         view.setupBottomNavigation()
+    }
+
+    override fun changeToolbarTitle(text: String) {
+        view.changeToolbarTitle(text)
     }
 }

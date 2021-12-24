@@ -1,4 +1,4 @@
-package com.yaromchikv.weatherapp.data
+package com.yaromchikv.weatherapp.data.utils
 
 sealed class Resource<T>(val data: T?, val message: String?) {
     class Success<T>(data: T?) : Resource<T>(data, null)

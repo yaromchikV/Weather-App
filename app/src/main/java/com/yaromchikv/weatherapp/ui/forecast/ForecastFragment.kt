@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.yaromchikv.weatherapp.R
 import com.yaromchikv.weatherapp.databinding.FragmentForecastBinding
+import com.yaromchikv.weatherapp.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -20,6 +21,12 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast), ForecastContract.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.onViewCreated()
+    }
+
+    override fun updateToolbarTitle(text: String) {
+        activity?.let {
+            (it as MainActivity).presenter.changeToolbarTitle(text)
+        }
     }
 
     override fun showWelcomeMessage(welcomeMessage: String) {

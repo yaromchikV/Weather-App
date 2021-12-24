@@ -1,4 +1,4 @@
-package com.yaromchikv.weatherapp.domain.model
+package com.yaromchikv.weatherapp.domain.model.weather
 
 import com.squareup.moshi.Json
 

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.yaromchikv.weatherapp.databinding.ItemDayBinding
 import com.yaromchikv.weatherapp.databinding.ItemWeatherBinding
-import com.yaromchikv.weatherapp.domain.model.forecast.Forecast
+import com.yaromchikv.weatherapp.domain.model.forecast.ForecastData
 import javax.inject.Singleton
 
 @Singleton
@@ -46,7 +46,7 @@ class ForecastRVAdapter : ListAdapter<Any, ForecastRVAdapter.ItemViewHolder>(DIF
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (getItem(position) is Forecast) WEATHER_VIEW_TYPE else DAY_VIEW_TYPE
+        return if (getItem(position) is ForecastData) WEATHER_VIEW_TYPE else DAY_VIEW_TYPE
     }
 
     inner class WeatherViewHolder(
@@ -54,7 +54,7 @@ class ForecastRVAdapter : ListAdapter<Any, ForecastRVAdapter.ItemViewHolder>(DIF
     ) : ItemViewHolder(binding.root) {
 
         override fun bind(item: Any) {
-            val forecast = item as Forecast
+            val forecast = item as ForecastData
             with(binding) {
                 //
             }
@@ -79,7 +79,7 @@ class ForecastRVAdapter : ListAdapter<Any, ForecastRVAdapter.ItemViewHolder>(DIF
             override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
                 return if (oldItem is String && newItem is String)
                     oldItem == newItem
-                else if (oldItem is Forecast && newItem is Forecast)
+                else if (oldItem is ForecastData && newItem is ForecastData)
                     oldItem.datetime == newItem.datetime
                 else false
             }
@@ -87,7 +87,7 @@ class ForecastRVAdapter : ListAdapter<Any, ForecastRVAdapter.ItemViewHolder>(DIF
             override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
                 return if (oldItem is String && newItem is String)
                     oldItem.hashCode() == newItem.hashCode()
-                else if (oldItem is Forecast && newItem is Forecast)
+                else if (oldItem is ForecastData && newItem is ForecastData)
                     oldItem.hashCode() == newItem.hashCode()
                 else false
             }
