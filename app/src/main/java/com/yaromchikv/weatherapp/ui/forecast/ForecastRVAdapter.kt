@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.yaromchikv.weatherapp.databinding.ItemDayBinding
 import com.yaromchikv.weatherapp.databinding.ItemWeatherBinding
-import com.yaromchikv.weatherapp.domain.model.forecast.ForecastData
+import com.yaromchikv.weatherapp.domain.model.ForecastData
 import javax.inject.Singleton
 
 @Singleton

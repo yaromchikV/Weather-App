@@ -1,10 +1,11 @@
 package com.yaromchikv.weatherapp.domain.repository
 
 import com.yaromchikv.weatherapp.data.utils.Resource
-import com.yaromchikv.weatherapp.domain.model.weather.Weather
-import com.yaromchikv.weatherapp.domain.model.forecast.Forecast
+import com.yaromchikv.weatherapp.domain.model.Weather
+import com.yaromchikv.weatherapp.domain.model.Forecast
+import kotlinx.coroutines.flow.StateFlow
 
 interface WeatherRepository {
-    suspend fun getWeather(latitude: Double, longitude: Double): Resource<Weather>
-    suspend fun getForecast(latitude: Double, longitude: Double): Resource<Forecast>
+    fun fetchWeather(latitude: Double, longitude: Double)
+    fun getWeather(latitude: Double, longitude: Double): Resource<Weather>
 }

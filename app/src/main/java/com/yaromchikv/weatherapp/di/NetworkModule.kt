@@ -10,8 +10,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Singleton
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 @Module
@@ -20,17 +22,16 @@ object NetworkModule {
 
     private const val BASE_CURRENCY_URL = "https://api.openweathermap.org/"
 
-    private val moshi = MoshiConverterFactory.create(
-        Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
-    )
+    private val moshiBuilder = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
 
     @Provides
     @Singleton
     fun provideWeatherApi(): WeatherApi = Retrofit.Builder()
-        .addConverterFactory(moshi)
         .baseUrl(BASE_CURRENCY_URL)
+        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(moshiBuilder))
         .build()
         .create(WeatherApi::class.java)
 

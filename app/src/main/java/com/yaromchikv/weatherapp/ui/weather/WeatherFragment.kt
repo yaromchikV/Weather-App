@@ -2,11 +2,12 @@ package com.yaromchikv.weatherapp.ui.weather
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.yaromchikv.weatherapp.R
 import com.yaromchikv.weatherapp.databinding.FragmentWeatherBinding
-import com.yaromchikv.weatherapp.ui.MainActivity
+import com.yaromchikv.weatherapp.domain.model.Weather
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,7 +28,14 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), WeatherContract.Vie
         }
     }
 
-    override fun showWeather(weather: String) {
-        //binding.welcomeMessageTitle.text = welcomeMessage.title
+    override fun showWeather(weather: Weather) {
+        with(binding) {
+            city.text = weather.city
+            this.weather.text = weather.weatherData[0].description
+        }
+    }
+
+    override fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 }
