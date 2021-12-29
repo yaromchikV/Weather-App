@@ -8,30 +8,31 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.observers.DisposableObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import timber.log.Timber
 
 class WeatherRepositoryImpl(
     private val apiService: WeatherApi
 ) : WeatherRepository {
 
     private val _weatherResponse = MutableStateFlow<Resource<Weather>>(Resource.Idle())
-    val weatherResponse: StateFlow<Resource<Weather>> = _weatherResponse
 
     override fun fetchWeather(latitude: Double, longitude: Double) {
         apiService.getWeather(latitude, longitude)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(object : DisposableObserver<Weather?>() {
-                override fun onNext(data: Weather?) {
+            .subscribeWith(object : DisposableObserver<Weather>() {
+                override fun onNext(data: Weather) {
                     _weatherResponse.value = Resource.Success(data)
+                    Timber.i("Getting weather continues")
                 }
 
                 override fun onError(throwable: Throwable) {
                     _weatherResponse.value = Resource.Error("Network error")
+                    Timber.i("Getting weather error: ${throwable.localizedMessage}")
                 }
 
                 override fun onComplete() {
-                    //Log.d(TAG, "Completed")
+                    Timber.i("Getting weather complete")
                 }
             })
     }
