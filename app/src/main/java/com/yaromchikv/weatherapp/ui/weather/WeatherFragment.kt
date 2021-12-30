@@ -8,6 +8,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.yaromchikv.weatherapp.R
 import com.yaromchikv.weatherapp.databinding.FragmentWeatherBinding
 import com.yaromchikv.weatherapp.domain.model.Weather
+import com.yaromchikv.weatherapp.ui.common.Utils.getDirection
+import com.yaromchikv.weatherapp.ui.common.Utils.getIcon
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -30,8 +32,38 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), WeatherContract.Vie
 
     override fun showWeather(weather: Weather) {
         with(binding) {
-            city.text = weather.city
-            this.weather.text = weather.weatherData[0].description
+            val weatherImage = getIcon(weather.weatherData[0].icon)
+            val city = getString(R.string.city, weather.city, weather.location.country)
+            val weatherText = getString(
+                R.string.weather,
+                weather.conditions.temperature,
+                weather.weatherData[0].main
+            )
+            val humidity = getString(R.string.humidity, weather.conditions.humidity)
+
+            val volume = when {
+                weather.rain != null -> weather.rain.volume
+                weather.snow != null -> weather.snow.volume
+                else -> 0.0
+            }
+            val volumeImage =
+                if (volume != 0.0) R.drawable.icon_volume else R.drawable.icon_cloudiness
+            val volumeText = if (volume != 0.0) getString(R.string.volume, volume)
+            else getString(R.string.cloudiness, weather.clouds.cloudiness)
+
+            val pressure = getString(R.string.pressure, weather.conditions.pressure)
+            val windSpeed = getString(R.string.wind_speed, weather.wind.speed)
+            val windDirection = getDirection(weather.wind.degrees)
+
+            this.weatherImage.setImageResource(weatherImage)
+            this.city.text = city
+            this.weather.text = weatherText
+            this.humidityText.text = humidity
+            this.volumeIcon.setImageResource(volumeImage)
+            this.volumeText.text = volumeText
+            this.pressureText.text = pressure
+            this.windSpeedText.text = windSpeed
+            this.windDirectionText.text = windDirection
         }
     }
 

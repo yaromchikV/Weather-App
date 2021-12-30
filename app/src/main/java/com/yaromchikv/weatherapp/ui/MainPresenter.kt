@@ -8,6 +8,7 @@ class MainPresenter @Inject constructor(
 
     override fun onCreate() {
         view.setupBottomNavigation()
+        view.setupOnDestinationChangedListener()
     }
 
     override fun changeToolbarTitle(text: String) {

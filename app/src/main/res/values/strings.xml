@@ -4,4 +4,13 @@
     <string name="title_forecast">Forecast</string>
     <string name="today">Today</string>
     <string name="share">Share</string>
+
+    <string name="city">%1$s, %2$s</string>
+    <string name="weather">%1$d°C | %2$s</string>
+    <string name="humidity">%1$d%%</string>
+    <string name="volume">%1$.1f mm</string>
+    <string name="cloudiness">%1$d%%</string>
+    <string name="pressure">%1$d hPa</string>
+    <string name="wind_speed">%1$.1f m/s</string>
+
 </resources>

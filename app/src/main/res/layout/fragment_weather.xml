@@ -14,12 +14,13 @@
         app:layout_constraintBottom_toTopOf="@+id/city"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@drawable/ic_weather_icons_60" />
+        app:srcCompat="@drawable/icon_10d"
+        app:tint="@color/yellow" />
 
     <ImageView
         android:id="@+id/arrow_icon"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/city"
         app:layout_constraintEnd_toStartOf="@+id/city"
         app:layout_constraintTop_toTopOf="@+id/city"
@@ -30,10 +31,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
+        android:fontFamily="@font/nunito"
         android:gravity="center"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
-        android:textSize="20sp"
+        android:textColor="@color/light_gray"
+        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/weather"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,6 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
+        android:fontFamily="@font/nunito"
         android:gravity="center"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
@@ -70,21 +74,21 @@
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_marginStart="64dp"
+        android:padding="2dp"
         app:layout_constraintEnd_toStartOf="@+id/volume_icon"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/volume_icon"
-        tools:srcCompat="@drawable/ic_weather_icons_60" />
+        app:srcCompat="@drawable/icon_humidity"
+        app:tint="@color/yellow" />
 
     <TextView
         android:id="@+id/humidity_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        style="@style/TextViewDescription"
+        android:text="59%"
         app:layout_constraintEnd_toEndOf="@+id/humidity_icon"
         app:layout_constraintStart_toStartOf="@+id/humidity_icon"
-        app:layout_constraintTop_toBottomOf="@+id/humidity_icon"
-        tools:text="57%" />
+        app:layout_constraintTop_toBottomOf="@+id/humidity_icon" />
 
     <ImageView
         android:id="@+id/volume_icon"
@@ -94,17 +98,16 @@
         app:layout_constraintEnd_toStartOf="@+id/pressure_icon"
         app:layout_constraintStart_toEndOf="@+id/humidity_icon"
         app:layout_constraintTop_toBottomOf="@+id/divider_top"
-        tools:srcCompat="@drawable/ic_weather_icons_60" />
+        app:srcCompat="@drawable/icon_volume"
+        app:tint="@color/yellow" />
 
     <TextView
         android:id="@+id/volume_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        style="@style/TextViewDescription"
+        android:text="1.0 mm"
         app:layout_constraintEnd_toEndOf="@+id/volume_icon"
         app:layout_constraintStart_toStartOf="@+id/volume_icon"
-        app:layout_constraintTop_toBottomOf="@+id/volume_icon"
-        tools:text="1.0 mm" />
+        app:layout_constraintTop_toBottomOf="@+id/volume_icon" />
 
     <ImageView
         android:id="@+id/pressure_icon"
@@ -114,17 +117,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/volume_icon"
         app:layout_constraintTop_toTopOf="@+id/volume_icon"
-        tools:srcCompat="@drawable/ic_weather_icons_60" />
+        app:srcCompat="@drawable/icon_pressure"
+        app:tint="@color/yellow" />
 
     <TextView
         android:id="@+id/pressure_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        style="@style/TextViewDescription"
+        android:text="1019 hPa"
         app:layout_constraintEnd_toEndOf="@+id/pressure_icon"
         app:layout_constraintStart_toStartOf="@+id/pressure_icon"
-        app:layout_constraintTop_toBottomOf="@+id/pressure_icon"
-        tools:text="1019 hPa" />
+        app:layout_constraintTop_toBottomOf="@+id/pressure_icon" />
 
     <ImageView
         android:id="@+id/wind_speed_icon"
@@ -134,37 +136,36 @@
         app:layout_constraintEnd_toStartOf="@+id/volume_icon"
         app:layout_constraintStart_toEndOf="@+id/humidity_icon"
         app:layout_constraintTop_toBottomOf="@+id/volume_text"
-        tools:srcCompat="@drawable/ic_weather_icons_60" />
+        app:srcCompat="@drawable/icon_wind_speed"
+        app:tint="@color/yellow" />
 
     <TextView
         android:id="@+id/wind_speed_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        style="@style/TextViewDescription"
+        android:text="20 km/h"
         app:layout_constraintEnd_toEndOf="@+id/wind_speed_icon"
         app:layout_constraintStart_toStartOf="@+id/wind_speed_icon"
-        app:layout_constraintTop_toBottomOf="@+id/wind_speed_icon"
-        tools:text="20 km/h" />
+        app:layout_constraintTop_toBottomOf="@+id/wind_speed_icon" />
 
     <ImageView
-        android:id="@+id/wind_deg_icon"
+        android:id="@+id/wind_direction_icon"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_marginTop="20dp"
+        android:padding="2dp"
         app:layout_constraintEnd_toStartOf="@+id/pressure_icon"
         app:layout_constraintStart_toEndOf="@+id/volume_icon"
         app:layout_constraintTop_toBottomOf="@+id/volume_text"
-        tools:srcCompat="@drawable/ic_weather_icons_60" />
+        app:srcCompat="@drawable/icon_wind_deg"
+        app:tint="@color/yellow" />
 
     <TextView
-        android:id="@+id/wind_deg_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="@+id/wind_deg_icon"
-        app:layout_constraintStart_toStartOf="@+id/wind_deg_icon"
-        app:layout_constraintTop_toBottomOf="@+id/wind_deg_icon"
-        tools:text="SE" />
+        android:id="@+id/wind_direction_text"
+        style="@style/TextViewDescription"
+        android:text="SE"
+        app:layout_constraintEnd_toEndOf="@+id/wind_direction_icon"
+        app:layout_constraintStart_toStartOf="@+id/wind_direction_icon"
+        app:layout_constraintTop_toBottomOf="@+id/wind_direction_icon" />
 
     <View
         android:id="@+id/divider_bottom"
@@ -182,8 +183,10 @@
         android:layout_width="124dp"
         android:layout_height="48dp"
         android:text="@string/share"
-        android:textColor="#E4762E"
-        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:textColor="@color/orange"
+        android:fontFamily="@font/helvetica"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

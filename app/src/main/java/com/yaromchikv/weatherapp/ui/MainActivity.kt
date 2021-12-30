@@ -2,7 +2,8 @@ package com.yaromchikv.weatherapp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -20,6 +21,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), MainContract.Vie
     @Inject
     lateinit var presenter: MainContract.Presenter
 
+    private val navController: NavController by lazy {
+        (supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment).navController
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -30,12 +35,18 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), MainContract.Vie
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        val navController = findNavController(R.id.fragment_container)
         val appBarConfiguration = AppBarConfiguration(
             setOf(R.id.navigation_weather, R.id.navigation_forecast)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNavigation.setupWithNavController(navController)
+    }
+
+    override fun setupOnDestinationChangedListener() {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.navigation_weather)
+                changeToolbarTitle(getString(R.string.today))
+        }
     }
 
     override fun changeToolbarTitle(text: String) {

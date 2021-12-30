@@ -9,7 +9,6 @@ data class Weather(
     @Json(name = "rain") val rain: Rain?,
     @Json(name = "snow") val snow: Snow?,
     @Json(name = "wind") val wind: Wind,
-    @Json(name = "visibility") val visibility: Int,
     @Json(name = "name") val city: String,
     @Json(name = "sys") val location: Location,
     @Json(name = "coord") val coordinates: Coordinates,
@@ -31,7 +30,7 @@ data class Conditions(
 data class Clouds(@Json(name = "all") val cloudiness: Int)
 data class Rain(@Json(name = "3h") val volume: Double)
 data class Snow(@Json(name = "3h") val volume: Double)
-data class Wind(@Json(name = "speed") val speed: Double)
+data class Wind(@Json(name = "speed") val speed: Double, @Json(name = "deg") val degrees: Int)
 
 data class Location(@Json(name = "country") val country: String)
 

@@ -8,12 +8,13 @@
     <ImageView
         android:id="@+id/weather_image"
         android:layout_width="0dp"
+        android:padding="8dp"
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_weight="1"
         app:tint="@color/yellow"
-        tools:srcCompat="@drawable/ic_weather_icons_60" />
+        tools:srcCompat="@drawable/icon_09d" />
 
     <LinearLayout
         android:layout_width="0dp"

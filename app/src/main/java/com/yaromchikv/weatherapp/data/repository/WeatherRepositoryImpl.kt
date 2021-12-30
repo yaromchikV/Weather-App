@@ -23,16 +23,16 @@ class WeatherRepositoryImpl(
             .subscribeWith(object : DisposableObserver<Weather>() {
                 override fun onNext(data: Weather) {
                     _weatherResponse.value = Resource.Success(data)
-                    Timber.i("Getting weather continues")
+                    Timber.d("Getting weather continues")
                 }
 
                 override fun onError(throwable: Throwable) {
                     _weatherResponse.value = Resource.Error("Network error")
-                    Timber.i("Getting weather error: ${throwable.localizedMessage}")
+                    Timber.d("Getting weather error: ${throwable.localizedMessage}")
                 }
 
                 override fun onComplete() {
-                    Timber.i("Getting weather complete")
+                    Timber.d("Getting weather complete")
                 }
             })
     }
