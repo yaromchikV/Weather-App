@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.yaromchikv.weatherapp.R
 import com.yaromchikv.weatherapp.databinding.FragmentForecastBinding
+import com.yaromchikv.weatherapp.domain.model.ForecastData
 import com.yaromchikv.weatherapp.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -29,7 +30,7 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast), ForecastContract.
         }
     }
 
-    override fun showWelcomeMessage(welcomeMessage: String) {
+    override fun showForecastList(forecastList: List<ForecastData>) {
         //binding.welcomeMessageTitle.text = welcomeMessage.title
     }
 }

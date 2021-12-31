@@ -22,7 +22,7 @@ interface WeatherApi {
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
         @Query("units") units: String = "metric",
-        //@Query("appid") apiKey: String = Constants.API_KEY
+        @Query("appid") apiKey: String = Constants.API_KEY
     ): Observable<Forecast>
 
 }

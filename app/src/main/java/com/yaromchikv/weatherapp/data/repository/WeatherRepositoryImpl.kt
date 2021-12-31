@@ -1,44 +1,21 @@
 package com.yaromchikv.weatherapp.data.repository
 
 import com.yaromchikv.weatherapp.data.api.WeatherApi
-import com.yaromchikv.weatherapp.data.utils.Resource
+import com.yaromchikv.weatherapp.domain.model.Forecast
 import com.yaromchikv.weatherapp.domain.model.Weather
 import com.yaromchikv.weatherapp.domain.repository.WeatherRepository
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.observers.DisposableObserver
-import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlinx.coroutines.flow.MutableStateFlow
-import timber.log.Timber
+import io.reactivex.rxjava3.core.Observable
 
 class WeatherRepositoryImpl(
     private val apiService: WeatherApi
 ) : WeatherRepository {
 
-    private val _weatherResponse = MutableStateFlow<Resource<Weather>>(Resource.Idle())
-
-    override fun fetchWeather(latitude: Double, longitude: Double) {
-        apiService.getWeather(latitude, longitude)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(object : DisposableObserver<Weather>() {
-                override fun onNext(data: Weather) {
-                    _weatherResponse.value = Resource.Success(data)
-                    Timber.d("Getting weather continues")
-                }
-
-                override fun onError(throwable: Throwable) {
-                    _weatherResponse.value = Resource.Error("Network error")
-                    Timber.d("Getting weather error: ${throwable.localizedMessage}")
-                }
-
-                override fun onComplete() {
-                    Timber.d("Getting weather complete")
-                }
-            })
+    override fun getWeather(latitude: Double, longitude: Double): Observable<Weather> {
+        return apiService.getWeather(latitude, longitude)
     }
 
-    override fun getWeather(latitude: Double, longitude: Double): Resource<Weather> {
-        fetchWeather(latitude, longitude)
-        return _weatherResponse.value
+    override fun getForecast(latitude: Double, longitude: Double): Observable<Forecast> {
+        return apiService.getForecast(latitude, longitude)
     }
+
 }
