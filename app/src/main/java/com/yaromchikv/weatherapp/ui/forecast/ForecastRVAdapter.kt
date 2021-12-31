@@ -11,8 +11,7 @@ import com.yaromchikv.weatherapp.databinding.ItemWeatherBinding
 import com.yaromchikv.weatherapp.domain.model.ForecastData
 import javax.inject.Singleton
 
-@Singleton
-class ForecastRVAdapter : ListAdapter<Any, ForecastRVAdapter.ItemViewHolder>(DIFF_CALLBACK) {
+class ForecastRVAdapter : ListAdapter<Any, ForecastRVAdapter.ItemViewHolder>(DiffCallback) {
 
     abstract class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         abstract fun bind(item: Any)
@@ -45,10 +44,6 @@ class ForecastRVAdapter : ListAdapter<Any, ForecastRVAdapter.ItemViewHolder>(DIF
         }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (getItem(position) is ForecastData) WEATHER_VIEW_TYPE else DAY_VIEW_TYPE
-    }
-
     inner class WeatherViewHolder(
         private val binding: ItemWeatherBinding
     ) : ItemViewHolder(binding.root) {
@@ -71,11 +66,15 @@ class ForecastRVAdapter : ListAdapter<Any, ForecastRVAdapter.ItemViewHolder>(DIF
         }
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return if (getItem(position) is ForecastData) WEATHER_VIEW_TYPE else DAY_VIEW_TYPE
+    }
+
     companion object {
         private const val WEATHER_VIEW_TYPE = 1
         private const val DAY_VIEW_TYPE = 0
 
-        object DIFF_CALLBACK : DiffUtil.ItemCallback<Any>() {
+        object DiffCallback : DiffUtil.ItemCallback<Any>() {
             override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
                 return if (oldItem is String && newItem is String)
                     oldItem == newItem

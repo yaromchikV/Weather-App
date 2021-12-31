@@ -3,6 +3,8 @@ package com.yaromchikv.weatherapp.ui.forecast
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.yaromchikv.weatherapp.R
 import com.yaromchikv.weatherapp.databinding.FragmentForecastBinding
@@ -19,9 +21,19 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast), ForecastContract.
     @Inject
     lateinit var presenter: ForecastContract.Presenter
 
+    private val forecastAdapter = ForecastRVAdapter()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.onViewCreated()
+
+        binding.recyclerView.apply {
+            adapter = forecastAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            addItemDecoration(
+                DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+            )
+        }
     }
 
     override fun updateToolbarTitle(text: String) {
@@ -30,7 +42,7 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast), ForecastContract.
         }
     }
 
-    override fun showForecastList(forecastList: List<ForecastData>) {
-        //binding.welcomeMessageTitle.text = welcomeMessage.title
+    override fun showForecastList(forecastList: List<Any>) {
+        forecastAdapter.submitList(forecastList)
     }
 }

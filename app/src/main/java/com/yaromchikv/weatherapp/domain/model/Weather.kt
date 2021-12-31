@@ -24,7 +24,7 @@ data class WeatherData(
 data class Conditions(
     @Json(name = "humidity") val humidity: Int,
     @Json(name = "pressure") val pressure: Int,
-    @Json(name = "temp") val temperature: Int,
+    @Json(name = "temp") val temperature: Double,
 )
 
 data class Clouds(@Json(name = "all") val cloudiness: Int)

@@ -1,10 +1,8 @@
 package com.yaromchikv.weatherapp.ui.forecast
 
-import com.yaromchikv.weatherapp.domain.model.ForecastData
-
 interface ForecastContract {
     interface View {
-        fun showForecastList(forecastList: List<ForecastData>)
+        fun showForecastList(forecastList: List<Any>)
         fun updateToolbarTitle(text: String)
     }
 
