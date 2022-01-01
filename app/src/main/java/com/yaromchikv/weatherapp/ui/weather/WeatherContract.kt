@@ -8,6 +8,7 @@ interface WeatherContract {
         fun showProgressBar()
         fun hideProgressBar()
         fun showErrorImage(message: String? = null)
+        fun shareWeather(subject: String, text: String)
     }
 
     interface Presenter {

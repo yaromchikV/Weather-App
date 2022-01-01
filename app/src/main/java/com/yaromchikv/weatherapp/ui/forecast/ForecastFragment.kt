@@ -55,7 +55,11 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast), ForecastContract.
     }
 
     override fun showErrorImage(message: String?) {
-        if (message != null) binding.error.text = message
         binding.error.isVisible = true
+
+        binding.error.text = if (message == null)
+            getString(R.string.connection_error)
+        else
+            getString(R.string.unknown_error, message)
     }
 }

@@ -1,24 +1,24 @@
 package com.yaromchikv.weatherapp.ui.weather
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.yaromchikv.weatherapp.R
-import com.yaromchikv.weatherapp.databinding.FragmentWeatherBinding
+import com.yaromchikv.weatherapp.common.Utils.getDirection
+import com.yaromchikv.weatherapp.databinding.FragmentTodayBinding
 import com.yaromchikv.weatherapp.domain.model.Weather
-import com.yaromchikv.weatherapp.ui.common.Utils.getDirection
 import com.yaromchikv.weatherapp.ui.common.Utils.getIcon
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
-class WeatherFragment : Fragment(R.layout.fragment_weather), WeatherContract.View {
+class WeatherFragment : Fragment(R.layout.fragment_today), WeatherContract.View {
 
-    private val binding: FragmentWeatherBinding by viewBinding()
+    private val binding: FragmentTodayBinding by viewBinding()
 
     @Inject
     lateinit var presenter: WeatherContract.Presenter
@@ -80,7 +80,23 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), WeatherContract.Vie
     }
 
     override fun showErrorImage(message: String?) {
-        if (message != null) binding.error.text = message
+        binding.views.isVisible = false
         binding.error.isVisible = true
+
+        binding.error.text = if (message == null)
+            getString(R.string.connection_error)
+        else
+            getString(R.string.unknown_error, message)
+    }
+
+    override fun shareWeather(subject: String, text: String) {
+        val sendIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+            putExtra(Intent.EXTRA_TEXT, text)
+            type = "text/plain"
+        }
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
     }
 }

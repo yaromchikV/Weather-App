@@ -2,6 +2,7 @@ package com.yaromchikv.weatherapp.di
 
 import com.yaromchikv.weatherapp.domain.repository.WeatherRepository
 import com.yaromchikv.weatherapp.domain.usecases.ConvertForecastToListUseCase
+import com.yaromchikv.weatherapp.domain.usecases.GenerateMessageForSharingUseCase
 import com.yaromchikv.weatherapp.domain.usecases.GetForecastUseCase
 import com.yaromchikv.weatherapp.domain.usecases.GetWeatherUseCase
 import dagger.Module
@@ -28,5 +29,10 @@ object UseCasesModule {
     @Singleton
     fun provideConvertForecastToListUseCase(): ConvertForecastToListUseCase =
         ConvertForecastToListUseCase()
+
+    @Provides
+    @Singleton
+    fun provideGenerateMessageForSharingUseCase(): GenerateMessageForSharingUseCase =
+        GenerateMessageForSharingUseCase()
 
 }

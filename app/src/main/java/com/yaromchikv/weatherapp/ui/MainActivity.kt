@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), MainContract.Vie
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.navigation_weather, R.id.navigation_forecast)
+            setOf(R.id.navigation_today, R.id.navigation_forecast)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNavigation.setupWithNavController(navController)
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), MainContract.Vie
 
     override fun setupOnDestinationChangedListener() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.navigation_weather)
+            if (destination.id == R.id.navigation_today)
                 changeToolbarTitle(getString(R.string.today))
         }
     }
