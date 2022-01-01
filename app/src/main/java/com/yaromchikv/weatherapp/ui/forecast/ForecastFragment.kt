@@ -21,7 +21,8 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast), ForecastContract.
     @Inject
     lateinit var presenter: ForecastContract.Presenter
 
-    private val forecastAdapter = ForecastRVAdapter()
+    @Inject
+    lateinit var forecastAdapter: ForecastRVAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

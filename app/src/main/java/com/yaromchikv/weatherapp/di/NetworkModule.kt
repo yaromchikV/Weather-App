@@ -38,14 +38,4 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideWeatherRepository(api: WeatherApi): WeatherRepository = WeatherRepositoryImpl(api)
-
-    @Provides
-    @Singleton
-    fun provideGetWeatherUseCase(repository: WeatherRepository): GetWeatherUseCase =
-        GetWeatherUseCase(repository)
-
-    @Provides
-    @Singleton
-    fun provideGetForecastUseCase(repository: WeatherRepository): GetForecastUseCase =
-        GetForecastUseCase(repository)
 }

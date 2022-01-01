@@ -12,6 +12,7 @@ import com.yaromchikv.weatherapp.ui.common.Utils.getDirection
 import com.yaromchikv.weatherapp.ui.common.Utils.getIcon
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class WeatherFragment : Fragment(R.layout.fragment_weather), WeatherContract.View {
@@ -36,7 +37,7 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), WeatherContract.Vie
             val city = getString(R.string.city, weather.city, weather.location.country)
             val weatherText = getString(
                 R.string.weather,
-                weather.conditions.temperature,
+                weather.conditions.temperature.roundToInt(),
                 weather.weatherData[0].main
             )
             val humidity = getString(R.string.humidity, weather.conditions.humidity)

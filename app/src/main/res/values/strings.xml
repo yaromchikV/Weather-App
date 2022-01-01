@@ -12,5 +12,6 @@
     <string name="cloudiness">%1$d%%</string>
     <string name="pressure">%1$d hPa</string>
     <string name="wind_speed">%1$.1f m/s</string>
+    <string name="temperature">%1$d°</string>
 
 </resources>

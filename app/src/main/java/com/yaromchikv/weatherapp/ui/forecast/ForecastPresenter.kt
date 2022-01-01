@@ -1,6 +1,7 @@
 package com.yaromchikv.weatherapp.ui.forecast
 
 import com.yaromchikv.weatherapp.domain.model.Forecast
+import com.yaromchikv.weatherapp.domain.usecases.ConvertForecastToListUseCase
 import com.yaromchikv.weatherapp.domain.usecases.GetForecastUseCase
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.observers.DisposableObserver
@@ -10,7 +11,8 @@ import timber.log.Timber
 
 class ForecastPresenter @Inject constructor(
     private val view: ForecastContract.View,
-    private val getForecastUseCase: GetForecastUseCase
+    private val getForecastUseCase: GetForecastUseCase,
+    private val convertForecastToListUseCase: ConvertForecastToListUseCase
 ) : ForecastContract.Presenter {
 
     override fun fetchForecast() {
@@ -20,7 +22,8 @@ class ForecastPresenter @Inject constructor(
             .subscribeWith(object : DisposableObserver<Forecast>() {
                 override fun onNext(forecast: Forecast) {
                     view.updateToolbarTitle(forecast.city.name)
-                    view.showForecastList(forecast.forecastList)
+                    val forecastWithHeaders = convertForecastToListUseCase(forecast.forecastList)
+                    view.showForecastList(forecastWithHeaders)
 
                     Timber.d("Getting weather continues")
                 }

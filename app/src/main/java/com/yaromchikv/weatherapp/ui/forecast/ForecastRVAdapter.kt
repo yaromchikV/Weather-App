@@ -1,17 +1,25 @@
 package com.yaromchikv.weatherapp.ui.forecast
 
+import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.yaromchikv.weatherapp.R
 import com.yaromchikv.weatherapp.databinding.ItemDayBinding
 import com.yaromchikv.weatherapp.databinding.ItemWeatherBinding
 import com.yaromchikv.weatherapp.domain.model.ForecastData
-import javax.inject.Singleton
+import com.yaromchikv.weatherapp.ui.common.Utils.getIcon
+import javax.inject.Inject
+import kotlin.math.roundToInt
+import org.apache.commons.lang3.text.WordUtils
 
-class ForecastRVAdapter : ListAdapter<Any, ForecastRVAdapter.ItemViewHolder>(DiffCallback) {
+class ForecastRVAdapter @Inject constructor(
+    private val context: Context
+) : ListAdapter<Any, ForecastRVAdapter.ItemViewHolder>(DiffCallback) {
 
     abstract class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         abstract fun bind(item: Any)
@@ -51,7 +59,17 @@ class ForecastRVAdapter : ListAdapter<Any, ForecastRVAdapter.ItemViewHolder>(Dif
         override fun bind(item: Any) {
             val forecast = item as ForecastData
             with(binding) {
-                //
+                itemView.setBackgroundResource(
+                    if (absoluteAdapterPosition == 1) R.drawable.border else Color.TRANSPARENT
+                )
+
+                weatherImage.setImageResource(getIcon(forecast.weatherData[0].icon))
+                time.text = forecast.datetime.substring(11, 16)
+                description.text = WordUtils.capitalizeFully(forecast.weatherData[0].description)
+                temperature.text = context.getString(
+                    R.string.temperature,
+                    forecast.conditions.temperature.roundToInt()
+                )
             }
         }
     }
