@@ -4,6 +4,9 @@ interface ForecastContract {
     interface View {
         fun showForecastList(forecastList: List<Any>)
         fun updateToolbarTitle(text: String)
+        fun showProgressBar()
+        fun hideProgressBar()
+        fun showErrorImage(message: String? = null)
     }
 
     interface Presenter {

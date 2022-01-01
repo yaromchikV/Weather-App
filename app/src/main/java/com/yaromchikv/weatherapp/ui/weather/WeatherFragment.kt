@@ -3,6 +3,7 @@ package com.yaromchikv.weatherapp.ui.weather
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.yaromchikv.weatherapp.R
@@ -68,7 +69,18 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), WeatherContract.Vie
         }
     }
 
-    override fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    override fun showProgressBar() {
+        binding.views.isVisible = false
+        binding.progressBar.isVisible = true
+    }
+
+    override fun hideProgressBar() {
+        binding.views.isVisible = true
+        binding.progressBar.isVisible = false
+    }
+
+    override fun showErrorImage(message: String?) {
+        if (message != null) binding.error.text = message
+        binding.error.isVisible = true
     }
 }

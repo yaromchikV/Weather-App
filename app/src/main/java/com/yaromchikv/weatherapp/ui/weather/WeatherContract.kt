@@ -5,7 +5,9 @@ import com.yaromchikv.weatherapp.domain.model.Weather
 interface WeatherContract {
     interface View {
         fun showWeather(weather: Weather)
-        fun showToast(message: String)
+        fun showProgressBar()
+        fun hideProgressBar()
+        fun showErrorImage(message: String? = null)
     }
 
     interface Presenter {

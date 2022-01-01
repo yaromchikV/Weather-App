@@ -11,8 +11,8 @@ class ConvertForecastToListUseCase {
         for (i in source.indices) {
             result.add(source[i])
             if (i != source.lastIndex) {
-                val currentDate = dateParse(source[i].datetime)
-                val nextDate = dateParse(source[i + 1].datetime)
+                val currentDate = dateTimeParse(source[i].datetime)
+                val nextDate = dateTimeParse(source[i + 1].datetime)
                 if (currentDate != nextDate) {
                     result.add(currentDate.dayOfWeek.name)
                 }
@@ -24,6 +24,6 @@ class ConvertForecastToListUseCase {
         return result.reversed()
     }
 
-    private fun dateParse(datetime: String): LocalDate =
+    private fun dateTimeParse(datetime: String): LocalDate =
         LocalDate.parse(datetime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
 }

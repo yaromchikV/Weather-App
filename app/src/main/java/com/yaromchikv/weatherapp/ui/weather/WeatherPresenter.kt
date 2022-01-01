@@ -24,17 +24,20 @@ class WeatherPresenter @Inject constructor(
                 }
 
                 override fun onError(throwable: Throwable) {
-                    view.showToast("Network error")
+                    view.hideProgressBar()
+                    view.showErrorImage()
                     Timber.d("Getting weather error: ${throwable.localizedMessage}")
                 }
 
                 override fun onComplete() {
+                    view.hideProgressBar()
                     Timber.d("Getting weather complete")
                 }
             })
     }
 
     override fun onViewCreated() {
+        view.showProgressBar()
         fetchWeather()
     }
 
