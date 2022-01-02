@@ -19,6 +19,11 @@ class WeatherPresenter @Inject constructor(
 
     private val currentWeather = MutableStateFlow<Weather?>(null)
 
+    override fun onViewCreated() {
+        view.showProgressBar()
+        fetchWeather()
+    }
+
     override fun fetchWeather() {
         getWeatherUseCase()
             .subscribeOn(Schedulers.io())
@@ -48,11 +53,6 @@ class WeatherPresenter @Inject constructor(
                     Timber.d("Getting weather complete")
                 }
             })
-    }
-
-    override fun onViewCreated() {
-        view.showProgressBar()
-        fetchWeather()
     }
 
     override fun onShareButtonClicked() {

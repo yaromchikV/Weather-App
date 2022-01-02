@@ -27,12 +27,32 @@ data class Conditions(
     @Json(name = "temp") val temperature: Double,
 )
 
-data class Clouds(@Json(name = "all") val cloudiness: Int)
-data class Rain(@Json(name = "3h") val volume: Double)
-data class Snow(@Json(name = "3h") val volume: Double)
-data class Wind(@Json(name = "speed") val speed: Double, @Json(name = "deg") val degrees: Int)
+data class Clouds(
+    @Json(name = "all") val cloudiness: Int
+)
 
-data class Location(@Json(name = "country") val country: String)
+data class Rain(
+    @Json(name = "1h") val volume1h: Double?,
+    @Json(name = "3h") val volume3h: Double?
+) {
+    val volume: Double get() = volume1h ?: volume3h ?: 0.0
+}
+
+data class Snow(
+    @Json(name = "1h") val volume1h: Double?,
+    @Json(name = "3h") val volume3h: Double?
+) {
+    val volume: Double get() = volume1h ?: volume3h ?: 0.0
+}
+
+data class Wind(
+    @Json(name = "speed") val speed: Double,
+    @Json(name = "deg") val degrees: Int
+)
+
+data class Location(
+    @Json(name = "country") val country: String
+)
 
 data class Coordinates(
     @Json(name = "lat") val latitude: Double,

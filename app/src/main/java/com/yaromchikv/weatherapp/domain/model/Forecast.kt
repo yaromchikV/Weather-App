@@ -13,4 +13,6 @@ data class ForecastData(
     @Json(name = "weather") val weatherData: List<WeatherData>
 )
 
-data class City(@Json(name = "name") val name: String)
+data class City(
+    @Json(name = "name") val name: String
+)

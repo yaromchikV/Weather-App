@@ -16,6 +16,12 @@ class ForecastPresenter @Inject constructor(
     private val convertForecastToListUseCase: ConvertForecastToListUseCase
 ) : ForecastContract.Presenter {
 
+    override fun onViewCreated() {
+        view.setupRVAdapter()
+        view.showProgressBar()
+        fetchForecast()
+    }
+
     override fun fetchForecast() {
         getForecastUseCase()
             .subscribeOn(Schedulers.io())
@@ -47,11 +53,4 @@ class ForecastPresenter @Inject constructor(
                 }
             })
     }
-
-    override fun onViewCreated() {
-        view.showProgressBar()
-        fetchForecast()
-    }
-
-
 }

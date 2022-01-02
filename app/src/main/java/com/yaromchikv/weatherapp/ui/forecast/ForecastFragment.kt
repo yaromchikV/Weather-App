@@ -28,7 +28,9 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast), ForecastContract.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.onViewCreated()
+    }
 
+    override fun setupRVAdapter() {
         binding.recyclerView.apply {
             adapter = forecastAdapter
             layoutManager = LinearLayoutManager(requireContext())

@@ -12,8 +12,8 @@ interface WeatherContract {
     }
 
     interface Presenter {
-        fun fetchWeather()
         fun onViewCreated()
+        fun fetchWeather()
         fun onShareButtonClicked()
     }
 }
