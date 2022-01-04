@@ -2,10 +2,11 @@ package com.yaromchikv.weatherapp.ui.weather
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.yaromchikv.weatherapp.R
 import com.yaromchikv.weatherapp.common.Utils.getDirection
 import com.yaromchikv.weatherapp.databinding.FragmentTodayBinding
@@ -16,12 +17,22 @@ import javax.inject.Inject
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
-class WeatherFragment : Fragment(R.layout.fragment_today), WeatherContract.View {
+class WeatherFragment : Fragment(), WeatherContract.View {
 
-    private val binding: FragmentTodayBinding by viewBinding()
+    private var _binding: FragmentTodayBinding? = null
+    private val binding get() = _binding!!
 
     @Inject
     lateinit var presenter: WeatherContract.Presenter
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentTodayBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,30 +44,30 @@ class WeatherFragment : Fragment(R.layout.fragment_today), WeatherContract.View 
     }
 
     override fun showWeather(weather: Weather) {
+        val weatherImage = getIcon(weather.weatherData[0].icon)
+        val city = getString(R.string.city, weather.city, weather.location.country)
+        val weatherText = getString(
+            R.string.weather,
+            weather.conditions.temperature.roundToInt(),
+            weather.weatherData[0].main
+        )
+        val humidity = getString(R.string.humidity, weather.conditions.humidity)
+
+        val volume = when {
+            weather.rain != null -> weather.rain.volume
+            weather.snow != null -> weather.snow.volume
+            else -> 0.0
+        }
+        val volumeImage =
+            if (volume != 0.0) R.drawable.icon_volume else R.drawable.icon_cloudiness
+        val volumeText = if (volume != 0.0) getString(R.string.volume, volume)
+        else getString(R.string.cloudiness, weather.clouds.cloudiness)
+
+        val pressure = getString(R.string.pressure, weather.conditions.pressure)
+        val windSpeed = getString(R.string.wind_speed, weather.wind.speed)
+        val windDirection = getDirection(weather.wind.degrees)
+
         with(binding) {
-            val weatherImage = getIcon(weather.weatherData[0].icon)
-            val city = getString(R.string.city, weather.city, weather.location.country)
-            val weatherText = getString(
-                R.string.weather,
-                weather.conditions.temperature.roundToInt(),
-                weather.weatherData[0].main
-            )
-            val humidity = getString(R.string.humidity, weather.conditions.humidity)
-
-            val volume = when {
-                weather.rain != null -> weather.rain.volume
-                weather.snow != null -> weather.snow.volume
-                else -> 0.0
-            }
-            val volumeImage =
-                if (volume != 0.0) R.drawable.icon_volume else R.drawable.icon_cloudiness
-            val volumeText = if (volume != 0.0) getString(R.string.volume, volume)
-            else getString(R.string.cloudiness, weather.clouds.cloudiness)
-
-            val pressure = getString(R.string.pressure, weather.conditions.pressure)
-            val windSpeed = getString(R.string.wind_speed, weather.wind.speed)
-            val windDirection = getDirection(weather.wind.degrees)
-
             this.weatherImage.setImageResource(weatherImage)
             this.city.text = city
             this.weather.text = weatherText
@@ -80,23 +91,18 @@ class WeatherFragment : Fragment(R.layout.fragment_today), WeatherContract.View 
     }
 
     override fun showErrorImage(message: String?) {
-        binding.views.isVisible = false
-        binding.error.isVisible = true
+        with(binding) {
+            views.isVisible = false
+            error.isVisible = true
 
-        binding.error.text = if (message == null)
-            getString(R.string.connection_error)
-        else
-            getString(R.string.unknown_error, message)
+            error.text = if (message == null)
+                getString(R.string.connection_error)
+            else
+                getString(R.string.unknown_error, message)
+        }
     }
 
-    override fun shareWeather(subject: String, text: String) {
-        val sendIntent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_SUBJECT, subject)
-            putExtra(Intent.EXTRA_TEXT, text)
-            type = "text/plain"
-        }
-        val shareIntent = Intent.createChooser(sendIntent, null)
-        startActivity(shareIntent)
+    override fun openShareActivity(intent: Intent) {
+        startActivity(intent)
     }
 }

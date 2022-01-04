@@ -1,5 +1,6 @@
 package com.yaromchikv.weatherapp.ui.weather
 
+import android.content.Intent
 import com.yaromchikv.weatherapp.domain.model.Weather
 
 interface WeatherContract {
@@ -8,7 +9,7 @@ interface WeatherContract {
         fun showProgressBar()
         fun hideProgressBar()
         fun showErrorImage(message: String? = null)
-        fun shareWeather(subject: String, text: String)
+        fun openShareActivity(intent: Intent)
     }
 
     interface Presenter {

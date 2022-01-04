@@ -2,8 +2,7 @@ package com.yaromchikv.weatherapp.ui
 
 interface MainContract {
     interface View {
-        fun setupBottomNavigation()
-        fun setupOnDestinationChangedListener()
+        fun setupNavigation()
         fun changeToolbarTitle(text: String)
     }
 

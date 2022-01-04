@@ -18,7 +18,7 @@ abstract class MainModule {
     abstract fun bindActivity(activity: MainActivity): MainContract.View
 
     @Binds
-    abstract fun bindPresenter(impl: MainPresenter): MainContract.Presenter
+    abstract fun bindPresenter(presenter: MainPresenter): MainContract.Presenter
 
 }
 

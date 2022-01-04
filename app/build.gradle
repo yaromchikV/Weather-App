@@ -73,9 +73,6 @@ dependencies {
 
     // RxJava Retrofit Adapter
     implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
-    
-    // Delegate for viewBinding
-    implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.3'
 
     // Timber
     implementation 'com.jakewharton.timber:timber:5.0.1'

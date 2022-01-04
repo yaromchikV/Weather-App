@@ -8,6 +8,7 @@ import io.reactivex.rxjava3.observers.DisposableObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.net.UnknownHostException
 import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableStateFlow
 import timber.log.Timber
 
 class ForecastPresenter @Inject constructor(
@@ -23,13 +24,14 @@ class ForecastPresenter @Inject constructor(
     }
 
     override fun fetchForecast() {
+
         getForecastUseCase()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object : DisposableObserver<Forecast>() {
                 override fun onNext(forecast: Forecast) {
-                    view.updateToolbarTitle(forecast.city.name)
                     val forecastWithHeaders = convertForecastToListUseCase(forecast.forecastList)
+                    view.updateToolbarTitle(forecast.city.name)
                     view.showForecastList(forecastWithHeaders)
 
                     Timber.d("Getting weather continues")
@@ -52,5 +54,6 @@ class ForecastPresenter @Inject constructor(
                     Timber.d("Getting weather complete")
                 }
             })
+
     }
 }

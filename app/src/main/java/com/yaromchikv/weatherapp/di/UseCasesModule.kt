@@ -4,6 +4,7 @@ import com.yaromchikv.weatherapp.domain.repository.WeatherRepository
 import com.yaromchikv.weatherapp.domain.usecases.ConvertForecastToListUseCase
 import com.yaromchikv.weatherapp.domain.usecases.GenerateMessageForSharingUseCase
 import com.yaromchikv.weatherapp.domain.usecases.GetForecastUseCase
+import com.yaromchikv.weatherapp.domain.usecases.GetLocationUseCase
 import com.yaromchikv.weatherapp.domain.usecases.GetWeatherUseCase
 import dagger.Module
 import dagger.Provides
@@ -34,5 +35,10 @@ object UseCasesModule {
     @Singleton
     fun provideGenerateMessageForSharingUseCase(): GenerateMessageForSharingUseCase =
         GenerateMessageForSharingUseCase()
+
+    @Provides
+    @Singleton
+    fun provideGetLocationUseCase(): GetLocationUseCase =
+        GetLocationUseCase()
 
 }

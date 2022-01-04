@@ -1,5 +1,6 @@
 package com.yaromchikv.weatherapp.ui.weather
 
+import android.content.Intent
 import com.yaromchikv.weatherapp.domain.model.Weather
 import com.yaromchikv.weatherapp.domain.usecases.GenerateMessageForSharingUseCase
 import com.yaromchikv.weatherapp.domain.usecases.GetWeatherUseCase
@@ -8,7 +9,6 @@ import io.reactivex.rxjava3.observers.DisposableObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.net.UnknownHostException
 import javax.inject.Inject
-import kotlinx.coroutines.flow.MutableStateFlow
 import timber.log.Timber
 
 class WeatherPresenter @Inject constructor(
@@ -17,7 +17,7 @@ class WeatherPresenter @Inject constructor(
     private val generateMessageForSharingUseCase: GenerateMessageForSharingUseCase
 ) : WeatherContract.Presenter {
 
-    private val currentWeather = MutableStateFlow<Weather?>(null)
+    private var currentWeather: Weather? = null
 
     override fun onViewCreated() {
         view.showProgressBar()
@@ -30,7 +30,7 @@ class WeatherPresenter @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object : DisposableObserver<Weather>() {
                 override fun onNext(weather: Weather) {
-                    currentWeather.value = weather
+                    currentWeather = weather
                     view.showWeather(weather)
 
                     Timber.d("Getting weather continues")
@@ -53,12 +53,22 @@ class WeatherPresenter @Inject constructor(
                     Timber.d("Getting weather complete")
                 }
             })
+
     }
 
     override fun onShareButtonClicked() {
-        if (currentWeather.value != null) {
-            val message = generateMessageForSharingUseCase(currentWeather.value!!)
-            view.shareWeather(message.first, message.second)
+        if (currentWeather != null) {
+            val message = generateMessageForSharingUseCase(currentWeather ?: return)
+
+            val sendIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_SUBJECT, message.first)
+                putExtra(Intent.EXTRA_TEXT, message.second)
+                type = "text/plain"
+            }
+            val shareIntent = Intent.createChooser(sendIntent, null)
+
+            view.openShareActivity(shareIntent)
         }
     }
 }
