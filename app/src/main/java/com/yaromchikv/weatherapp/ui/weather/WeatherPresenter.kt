@@ -4,7 +4,7 @@ import android.content.Intent
 import com.yaromchikv.weatherapp.domain.model.Weather
 import com.yaromchikv.weatherapp.domain.usecases.GenerateMessageForSharingUseCase
 import com.yaromchikv.weatherapp.domain.usecases.GetWeatherUseCase
-import com.yaromchikv.weatherapp.ui.common.CurrentLocation
+import com.yaromchikv.weatherapp.ui.common.LocationModel
 import com.yaromchikv.weatherapp.ui.common.LocationState
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -19,7 +19,7 @@ class WeatherPresenter @Inject constructor(
 ) : WeatherContract.Presenter {
 
     private var currentWeather: Weather? = null
-    private var currentLocation: CurrentLocation? = null
+    private var currentLocation: LocationModel? = null
 
     override fun onViewCreated() {
         view.updateToolbarTitle()

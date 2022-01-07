@@ -22,7 +22,7 @@ import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.Task
 import com.yaromchikv.weatherapp.R
 import com.yaromchikv.weatherapp.databinding.ActivityMainBinding
-import com.yaromchikv.weatherapp.ui.common.CurrentLocation
+import com.yaromchikv.weatherapp.ui.common.LocationModel
 import com.yaromchikv.weatherapp.ui.common.LocationState
 import com.yaromchikv.weatherapp.ui.forecast.ForecastFragment
 import com.yaromchikv.weatherapp.ui.weather.WeatherFragment
@@ -180,7 +180,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, ActivityListener {
 
         presenter.setLocation(
             LocationState.Ready(
-                CurrentLocation(
+                LocationModel(
                     location.latitude,
                     location.longitude,
                     addresses[0].locality ?: getString(R.string.unknown),

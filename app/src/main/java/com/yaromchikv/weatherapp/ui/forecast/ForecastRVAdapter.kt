@@ -87,9 +87,7 @@ class ForecastRVAdapter @Inject constructor(
         override fun bind(item: Any) {
             val day = item as String
             binding.day.text = day
-
-            if (adapterPosition == 0)
-                binding.dividerTop.isVisible = false
+            binding.dividerTop.isVisible = adapterPosition != 0
         }
     }
 

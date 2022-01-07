@@ -1,6 +1,6 @@
 package com.yaromchikv.weatherapp.ui.common
 
-data class CurrentLocation(
+data class LocationModel(
     val latitude: Double,
     val longitude: Double,
     val locality: String,
@@ -8,7 +8,7 @@ data class CurrentLocation(
 )
 
 sealed class LocationState {
-    data class Ready(val data: CurrentLocation) : LocationState()
+    data class Ready(val data: LocationModel) : LocationState()
     object Loading : LocationState()
     data class Error(val message: String?) : LocationState()
 }
