@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,56 +7,59 @@
 
     <ImageView
         android:id="@+id/weather_image"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_weight="1"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="6dp"
         android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/yellow"
         tools:ignore="ContentDescription"
         tools:srcCompat="@drawable/icon_09d" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/time"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="2"
-        android:orientation="vertical"
-        android:padding="8dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp">
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:gravity="bottom"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/description"
+        app:layout_constraintEnd_toStartOf="@+id/temperature"
+        app:layout_constraintStart_toEndOf="@+id/weather_image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="13:00" />
 
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            tools:text="13:00" />
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            tools:text="Clear" />
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/temperature"
+        app:layout_constraintStart_toEndOf="@+id/weather_image"
+        app:layout_constraintTop_toBottomOf="@+id/time"
+        tools:text="Scattered Clouds" />
 
     <TextView
         android:id="@+id/temperature"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="12dp"
-        android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/blue"
         android:textSize="60sp"
-        tools:text="15°" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="22°" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
