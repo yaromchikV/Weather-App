@@ -1,5 +1,6 @@
 package com.yaromchikv.weatherapp.ui.weather
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +12,7 @@ import com.yaromchikv.weatherapp.R
 import com.yaromchikv.weatherapp.common.Utils.getDirection
 import com.yaromchikv.weatherapp.databinding.FragmentTodayBinding
 import com.yaromchikv.weatherapp.domain.model.Weather
-import com.yaromchikv.weatherapp.ui.MainActivity
+import com.yaromchikv.weatherapp.ui.ActivityListener
 import com.yaromchikv.weatherapp.ui.common.LocationState
 import com.yaromchikv.weatherapp.ui.common.Utils.getIcon
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +27,8 @@ class WeatherFragment : Fragment(), WeatherContract.View {
 
     @Inject
     lateinit var presenter: WeatherContract.Presenter
+
+    private lateinit var activityListener: ActivityListener
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,6 +51,11 @@ class WeatherFragment : Fragment(), WeatherContract.View {
                 presenter.onRetryButtonClicked()
             }
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activityListener = activity as ActivityListener
     }
 
     override fun showWeather(weather: Weather, locality: String, country: String) {
@@ -105,7 +113,6 @@ class WeatherFragment : Fragment(), WeatherContract.View {
         }
     }
 
-
     override fun showProgressBar() {
         binding.views.isVisible = false
         binding.progressBar.isVisible = true
@@ -116,19 +123,23 @@ class WeatherFragment : Fragment(), WeatherContract.View {
         binding.progressBar.isVisible = false
     }
 
-    override fun reloadData() {
-        activity?.let { (it as MainActivity).presenter.readyToLoad() }
-    }
-
     override fun openShareActivity(intent: Intent) {
         startActivity(intent)
     }
 
-    override fun updatePosition() {
+    override fun updateLocation() {
         presenter.fetchWeather()
     }
 
-    override fun getPosition(): LocationState? {
-        return activity?.let { (it as MainActivity).presenter.getLocation() }
+    override fun updateToolbarTitle() {
+        activityListener.updateToolbarTitle(getString(R.string.today))
+    }
+
+    override fun reloadData() {
+        activityListener.reloadData()
+    }
+
+    override fun getLocation(): LocationState {
+        return activityListener.getLocation()
     }
 }

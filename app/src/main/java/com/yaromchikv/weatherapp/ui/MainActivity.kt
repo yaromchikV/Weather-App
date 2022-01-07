@@ -32,7 +32,7 @@ import javax.inject.Inject
 import timber.log.Timber
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), MainContract.View {
+class MainActivity : AppCompatActivity(), MainContract.View, ActivityListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -53,21 +53,16 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         presenter.onCreate()
     }
 
     override fun onStart() {
         super.onStart()
-        presenter.readyToLoad()
+        presenter.updateLocation()
     }
 
     override fun setupNavigation() {
         binding.bottomNavigation.setupWithNavController(navHostFragment.navController)
-        navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.navigation_today)
-                changeToolbarTitle(getString(R.string.today))
-        }
     }
 
     override fun changeToolbarTitle(text: String) {
@@ -196,11 +191,11 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         presenter.onUpdateLocation()
     }
 
-    override fun updateLocation() {
+    override fun updateFragment() {
         val fragment = navHostFragment.childFragmentManager.fragments[0]
         when (navHostFragment.navController.currentDestination?.id) {
-            R.id.navigation_today -> (fragment as WeatherFragment).updatePosition()
-            R.id.navigation_forecast -> (fragment as ForecastFragment).updatePosition()
+            R.id.navigation_today -> (fragment as WeatherFragment).updateLocation()
+            R.id.navigation_forecast -> (fragment as ForecastFragment).updateLocation()
         }
     }
 
@@ -241,6 +236,18 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         }
     }
     //endregion
+
+    override fun updateToolbarTitle(text: String) {
+        presenter.changeToolbarTitle(text)
+    }
+
+    override fun reloadData() {
+        presenter.updateLocation()
+    }
+
+    override fun getLocation(): LocationState {
+        return presenter.getLocation()
+    }
 
     companion object {
         private const val LOCATION_REQUEST_CODE = 1000

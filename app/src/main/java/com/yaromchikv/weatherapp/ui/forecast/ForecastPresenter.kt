@@ -21,7 +21,7 @@ class ForecastPresenter @Inject constructor(
     }
 
     override fun fetchForecast() {
-        when (val it = view.getPosition()) {
+        when (val it = view.getLocation()) {
             is LocationState.Ready -> {
                 getForecastUseCase(it.data.latitude, it.data.longitude)
                     .subscribeOn(Schedulers.io())

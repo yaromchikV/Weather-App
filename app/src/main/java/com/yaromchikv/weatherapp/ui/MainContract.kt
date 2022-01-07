@@ -7,14 +7,14 @@ interface MainContract {
         fun setupNavigation()
         fun changeToolbarTitle(text: String)
         fun determineLocation()
-        fun updateLocation()
+        fun updateFragment()
         fun showGpsDialog()
         fun showPermissionDeniedDialog()
     }
 
     interface Presenter {
         fun onCreate()
-        fun readyToLoad()
+        fun updateLocation()
         fun changeToolbarTitle(text: String)
         fun setLocation(location: LocationState)
         fun getLocation(): LocationState

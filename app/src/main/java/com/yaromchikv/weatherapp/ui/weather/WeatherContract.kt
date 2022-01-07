@@ -11,10 +11,11 @@ interface WeatherContract {
         fun hideError()
         fun showProgressBar()
         fun hideProgressBar()
-        fun reloadData()
         fun openShareActivity(intent: Intent)
-        fun updatePosition()
-        fun getPosition(): LocationState?
+        fun updateLocation()
+        fun updateToolbarTitle()
+        fun reloadData()
+        fun getLocation(): LocationState?
     }
 
     interface Presenter {

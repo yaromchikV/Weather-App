@@ -13,7 +13,7 @@ class MainPresenter @Inject constructor(
         view.setupNavigation()
     }
 
-    override fun readyToLoad() {
+    override fun updateLocation() {
         view.determineLocation()
     }
 
@@ -28,7 +28,7 @@ class MainPresenter @Inject constructor(
     override fun getLocation() = location
 
     override fun onUpdateLocation() {
-        view.updateLocation()
+        view.updateFragment()
     }
 
     override fun onGpsDisabled() {

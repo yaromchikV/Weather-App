@@ -5,15 +5,15 @@ import com.yaromchikv.weatherapp.ui.common.LocationState
 interface ForecastContract {
     interface View {
         fun setupRVAdapter()
-        fun updateToolbarTitle(text: String)
         fun showForecast(forecastList: List<Any>)
         fun showError(message: String? = null)
         fun hideError()
         fun showProgressBar()
         fun hideProgressBar()
+        fun updateLocation()
+        fun updateToolbarTitle(text: String)
         fun reloadData()
-        fun updatePosition()
-        fun getPosition(): LocationState?
+        fun getLocation(): LocationState?
     }
 
     interface Presenter {

@@ -22,11 +22,12 @@ class WeatherPresenter @Inject constructor(
     private var currentLocation: CurrentLocation? = null
 
     override fun onViewCreated() {
+        view.updateToolbarTitle()
         fetchWeather()
     }
 
     override fun fetchWeather() {
-        when (val it = view.getPosition()) {
+        when (val it = view.getLocation()) {
             is LocationState.Ready -> {
                 currentLocation = it.data
                 getWeatherUseCase(it.data.latitude, it.data.longitude)
