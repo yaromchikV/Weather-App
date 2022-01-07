@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -64,6 +65,10 @@ class ForecastRVAdapter @Inject constructor(
                     else Color.TRANSPARENT
                 )
 
+                val isLast = adapterPosition == currentList.lastIndex
+                dividerBottom.isVisible =
+                    !(isLast || (!isLast && getItemViewType(adapterPosition + 1) == DAY_VIEW_TYPE))
+
                 weatherImage.setImageResource(getIcon(forecast.weatherData[0].icon))
                 time.text = forecast.datetime.substring(11, 16)
                 description.text = WordUtils.capitalizeFully(forecast.weatherData[0].description)
@@ -82,6 +87,9 @@ class ForecastRVAdapter @Inject constructor(
         override fun bind(item: Any) {
             val day = item as String
             binding.day.text = day
+
+            if (adapterPosition == 0)
+                binding.dividerTop.isVisible = false
         }
     }
 

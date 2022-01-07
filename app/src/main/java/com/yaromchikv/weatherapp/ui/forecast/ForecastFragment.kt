@@ -58,7 +58,7 @@ class ForecastFragment : Fragment(), ForecastContract.View {
         binding.recyclerView.apply {
             adapter = forecastAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            addItemDecoration(DividerItemDecoration(requireContext(), VERTICAL))
+            //addItemDecoration(DividerItemDecoration(requireContext(), VERTICAL))
         }
     }
 

@@ -56,6 +56,7 @@ class ForecastPresenter @Inject constructor(
 
     override fun onRetryButtonClicked() {
         view.hideError()
+        view.showProgressBar()
         view.reloadData()
     }
 }

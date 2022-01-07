@@ -62,4 +62,13 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="22°" />
 
+    <View
+        android:id="@+id/divider_bottom"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/description" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
