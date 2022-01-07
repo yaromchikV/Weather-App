@@ -1,8 +1,12 @@
 <resources>
-    <string name="app_name">Weather App</string>
+    <string name="app_name">Weather</string>
     <string name="today">Today</string>
     <string name="forecast">Forecast</string>
+
     <string name="share">Share</string>
+    <string name="retry">Retry</string>
+    <string name="ok">OK</string>
+    <string name="unknown">Unknown</string>
 
     <string name="city">%1$s, %2$s</string>
     <string name="weather">%1$d°C | %2$s</string>
@@ -15,15 +19,11 @@
 
     <string name="connection_error">Connection error</string>
     <string name="error_obtain_permission">Error in obtaining permission</string>
-    <string name="error_get_location">Error trying to get GPS location</string>
+    <string name="error_get_location">Error getting GPS location</string>
 
-    <string name="unknown">Unknown</string>
-    <string name="ok">OK</string>
-
-    <string name="title_location_dialog">Enable location detection</string>
+    <string name="title_location_dialog">Enable geolocation tracking</string>
     <string name="message_location_dialog">Go to settings?</string>
     <string name="title_permission_dialog">Oops, you\'ve denied the permission!</string>
     <string name="message_permission_dialog">To get the weather, the application needs access to the location. If you deny the permission again, it can only be enabled in settings.</string>
-    <string name="retry">Retry</string>
 
 </resources>
