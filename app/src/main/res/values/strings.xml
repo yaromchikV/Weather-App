@@ -18,12 +18,12 @@
     <string name="temperature">%1$d°</string>
 
     <string name="connection_error">Connection error</string>
-    <string name="error_obtain_permission">Error in obtaining permission</string>
+    <string name="error_obtain_permission">Permission obtaining error</string>
     <string name="error_get_location">Error getting GPS location</string>
 
     <string name="title_location_dialog">Enable geolocation tracking</string>
     <string name="message_location_dialog">Go to settings?</string>
     <string name="title_permission_dialog">Oops, you\'ve denied the permission!</string>
-    <string name="message_permission_dialog">To get the weather, the application needs access to the location. If you deny the permission again, it can only be enabled in settings.</string>
+    <string name="message_permission_dialog">To get the weather, the application needs access to the location. If you deny the permission again, it will be available only in the settings.</string>
 
 </resources>
