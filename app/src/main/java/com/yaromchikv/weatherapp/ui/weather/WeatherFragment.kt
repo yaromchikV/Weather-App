@@ -11,6 +11,8 @@ import com.yaromchikv.weatherapp.R
 import com.yaromchikv.weatherapp.common.Utils.getDirection
 import com.yaromchikv.weatherapp.databinding.FragmentTodayBinding
 import com.yaromchikv.weatherapp.domain.model.Weather
+import com.yaromchikv.weatherapp.ui.MainActivity
+import com.yaromchikv.weatherapp.ui.common.LocationState
 import com.yaromchikv.weatherapp.ui.common.Utils.getIcon
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -43,9 +45,9 @@ class WeatherFragment : Fragment(), WeatherContract.View {
         }
     }
 
-    override fun showWeather(weather: Weather) {
+    override fun showWeather(weather: Weather, locality: String, country: String) {
         val weatherImage = getIcon(weather.weatherData[0].icon)
-        val city = getString(R.string.city, weather.city, weather.location.country)
+        val location = getString(R.string.city, locality, country)
         val weatherText = getString(
             R.string.weather,
             weather.conditions.temperature.roundToInt(),
@@ -69,7 +71,7 @@ class WeatherFragment : Fragment(), WeatherContract.View {
 
         with(binding) {
             this.weatherImage.setImageResource(weatherImage)
-            this.city.text = city
+            this.location.text = location
             this.weather.text = weatherText
             this.humidityText.text = humidity
             this.volumeIcon.setImageResource(volumeImage)
@@ -77,6 +79,16 @@ class WeatherFragment : Fragment(), WeatherContract.View {
             this.pressureText.text = pressure
             this.windSpeedText.text = windSpeed
             this.windDirectionText.text = windDirection
+        }
+    }
+
+    override fun showError(message: String?) {
+        with(binding) {
+            progressBar.isVisible = false
+            views.isVisible = false
+            error.isVisible = true
+
+            error.text = message ?: getString(R.string.connection_error)
         }
     }
 
@@ -90,19 +102,15 @@ class WeatherFragment : Fragment(), WeatherContract.View {
         binding.progressBar.isVisible = false
     }
 
-    override fun showErrorImage(message: String?) {
-        with(binding) {
-            views.isVisible = false
-            error.isVisible = true
-
-            error.text = if (message == null)
-                getString(R.string.connection_error)
-            else
-                getString(R.string.unknown_error, message)
-        }
-    }
-
     override fun openShareActivity(intent: Intent) {
         startActivity(intent)
+    }
+
+    override fun updatePosition() {
+        presenter.fetchWeather()
+    }
+
+    override fun getPosition(): LocationState? {
+        return activity?.let { (it as MainActivity).presenter.getLocation() }
     }
 }

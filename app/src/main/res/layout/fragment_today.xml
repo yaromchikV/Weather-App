@@ -36,14 +36,14 @@
         android:id="@+id/views"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:constraint_referenced_ids="weather_image, city, arrow, weather, divider_top, divider_bottom, share_button, humidity_icon, humidity_text, volume_icon, volume_text, pressure_icon, pressure_text, wind_speed_icon, wind_speed_text, wind_direction_icon, wind_speed_text" />
+        app:constraint_referenced_ids="weather_image, location, arrow, weather, divider_top, divider_bottom, share_button, humidity_icon, humidity_text, volume_icon, volume_text, pressure_icon, pressure_text, wind_speed_icon, wind_speed_text, wind_direction_icon, wind_speed_text" />
 
     <ImageView
         android:id="@+id/weather_image"
         android:layout_width="152dp"
         android:layout_height="152dp"
         android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/city"
+        app:layout_constraintBottom_toTopOf="@+id/location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:tint="@color/yellow"
@@ -53,13 +53,13 @@
         android:id="@+id/arrow"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/city"
-        app:layout_constraintEnd_toStartOf="@+id/city"
-        app:layout_constraintTop_toTopOf="@+id/city"
+        app:layout_constraintBottom_toBottomOf="@+id/location"
+        app:layout_constraintEnd_toStartOf="@+id/location"
+        app:layout_constraintTop_toTopOf="@+id/location"
         app:srcCompat="@drawable/ic_arrow" />
 
     <TextView
-        android:id="@+id/city"
+        android:id="@+id/location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"

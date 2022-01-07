@@ -5,8 +5,6 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.yaromchikv.weatherapp.data.api.WeatherApi
 import com.yaromchikv.weatherapp.data.repository.WeatherRepositoryImpl
 import com.yaromchikv.weatherapp.domain.repository.WeatherRepository
-import com.yaromchikv.weatherapp.domain.usecases.GetForecastUseCase
-import com.yaromchikv.weatherapp.domain.usecases.GetWeatherUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

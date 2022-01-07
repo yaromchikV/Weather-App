@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.yaromchikv.weatherapp.R
 import com.yaromchikv.weatherapp.databinding.FragmentForecastBinding
 import com.yaromchikv.weatherapp.ui.MainActivity
+import com.yaromchikv.weatherapp.ui.common.LocationState
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -50,13 +51,19 @@ class ForecastFragment : Fragment(), ForecastContract.View {
     }
 
     override fun updateToolbarTitle(text: String) {
-        activity?.let {
-            (it as MainActivity).presenter.changeToolbarTitle(text)
-        }
+        activity?.let { (it as MainActivity).presenter.changeToolbarTitle(text) }
     }
 
-    override fun showForecastList(forecastList: List<Any>) {
+    override fun showForecast(forecastList: List<Any>) {
         forecastAdapter.submitList(forecastList)
+    }
+
+    override fun showError(message: String?) {
+        with(binding) {
+            progressBar.isVisible = false
+            error.isVisible = true
+            error.text = message ?: getString(R.string.connection_error)
+        }
     }
 
     override fun showProgressBar() {
@@ -67,13 +74,11 @@ class ForecastFragment : Fragment(), ForecastContract.View {
         binding.progressBar.isVisible = false
     }
 
-    override fun showErrorImage(message: String?) {
-        with(binding) {
-            error.isVisible = true
-            error.text = if (message == null)
-                getString(R.string.connection_error)
-            else
-                getString(R.string.unknown_error, message)
-        }
+    override fun updatePosition() {
+        presenter.fetchForecast()
+    }
+
+    override fun getPosition(): LocationState? {
+        return activity?.let { (it as MainActivity).presenter.getLocation() }
     }
 }

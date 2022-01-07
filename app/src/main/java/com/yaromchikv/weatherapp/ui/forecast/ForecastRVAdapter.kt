@@ -60,7 +60,8 @@ class ForecastRVAdapter @Inject constructor(
             val forecast = item as ForecastData
             with(binding) {
                 itemView.setBackgroundResource(
-                    if (absoluteAdapterPosition == 1) R.drawable.border else Color.TRANSPARENT
+                    if (adapterPosition == 1) R.drawable.border
+                    else Color.TRANSPARENT
                 )
 
                 weatherImage.setImageResource(getIcon(forecast.weatherData[0].icon))

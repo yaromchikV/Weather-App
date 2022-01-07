@@ -6,9 +6,9 @@ import java.text.DecimalFormat
 import org.apache.commons.lang3.text.WordUtils
 
 class GenerateMessageForSharingUseCase {
-    operator fun invoke(weather: Weather): Pair<String, String> {
-        val subject = "Current weather: ${weather.city}"
-        val text = "Location: ${weather.city}, ${weather.location.country}.\n" +
+    operator fun invoke(weather: Weather, location: Pair<String, String>): Pair<String, String> {
+        val subject = "Current weather: ${location.first}"
+        val text = "Location: ${location.first}, ${location.second}.\n" +
                 "Weather: ${WordUtils.capitalizeFully(weather.weatherData[0].description)}.\n" +
                 "Temperature: ${format(weather.conditions.temperature)}°C.\n" +
                 "Humidity: ${weather.conditions.humidity}%.\n" +
