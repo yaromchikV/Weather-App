@@ -76,4 +76,9 @@ class WeatherPresenter @Inject constructor(
             view.openShareActivity(shareIntent)
         }
     }
+
+    override fun onRetryButtonClicked() {
+        view.hideError()
+        view.reloadData()
+    }
 }

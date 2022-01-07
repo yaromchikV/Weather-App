@@ -40,6 +40,10 @@ class ForecastFragment : Fragment(), ForecastContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.onViewCreated()
+
+        binding.retryButton.setOnClickListener {
+            presenter.onRetryButtonClicked()
+        }
     }
 
     override fun setupRVAdapter() {
@@ -61,8 +65,19 @@ class ForecastFragment : Fragment(), ForecastContract.View {
     override fun showError(message: String?) {
         with(binding) {
             progressBar.isVisible = false
+            recyclerView.isVisible = false
+
+            retryButton.isVisible = true
             error.isVisible = true
             error.text = message ?: getString(R.string.connection_error)
+        }
+    }
+
+    override fun hideError() {
+        with(binding) {
+            recyclerView.isVisible = true
+            error.isVisible = false
+            retryButton.isVisible = false
         }
     }
 
@@ -72,6 +87,10 @@ class ForecastFragment : Fragment(), ForecastContract.View {
 
     override fun hideProgressBar() {
         binding.progressBar.isVisible = false
+    }
+
+    override fun reloadData() {
+        activity?.let { (it as MainActivity).presenter.readyToLoad() }
     }
 
     override fun updatePosition() {

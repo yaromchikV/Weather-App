@@ -8,8 +8,10 @@ interface WeatherContract {
     interface View {
         fun showWeather(weather: Weather, locality: String, country: String)
         fun showError(message: String? = null)
+        fun hideError()
         fun showProgressBar()
         fun hideProgressBar()
+        fun reloadData()
         fun openShareActivity(intent: Intent)
         fun updatePosition()
         fun getPosition(): LocationState?
@@ -19,5 +21,6 @@ interface WeatherContract {
         fun onViewCreated()
         fun fetchWeather()
         fun onShareButtonClicked()
+        fun onRetryButtonClicked()
     }
 }

@@ -8,8 +8,10 @@ interface ForecastContract {
         fun updateToolbarTitle(text: String)
         fun showForecast(forecastList: List<Any>)
         fun showError(message: String? = null)
+        fun hideError()
         fun showProgressBar()
         fun hideProgressBar()
+        fun reloadData()
         fun updatePosition()
         fun getPosition(): LocationState?
     }
@@ -17,5 +19,6 @@ interface ForecastContract {
     interface Presenter {
         fun onViewCreated()
         fun fetchForecast()
+        fun onRetryButtonClicked()
     }
 }

@@ -53,4 +53,9 @@ class ForecastPresenter @Inject constructor(
             else -> Unit
         }
     }
+
+    override fun onRetryButtonClicked() {
+        view.hideError()
+        view.reloadData()
+    }
 }

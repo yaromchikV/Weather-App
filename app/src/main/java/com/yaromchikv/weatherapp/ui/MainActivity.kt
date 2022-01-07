@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun onStart() {
         super.onStart()
-        presenter.onStart()
+        presenter.readyToLoad()
     }
 
     override fun setupNavigation() {

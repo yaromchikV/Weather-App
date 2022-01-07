@@ -13,7 +13,7 @@ class MainPresenter @Inject constructor(
         view.setupNavigation()
     }
 
-    override fun onStart() {
+    override fun readyToLoad() {
         view.determineLocation()
     }
 

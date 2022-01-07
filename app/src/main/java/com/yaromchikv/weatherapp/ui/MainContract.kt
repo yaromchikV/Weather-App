@@ -14,7 +14,7 @@ interface MainContract {
 
     interface Presenter {
         fun onCreate()
-        fun onStart()
+        fun readyToLoad()
         fun changeToolbarTitle(text: String)
         fun setLocation(location: LocationState)
         fun getLocation(): LocationState

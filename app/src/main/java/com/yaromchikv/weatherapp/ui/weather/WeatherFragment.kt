@@ -40,8 +40,13 @@ class WeatherFragment : Fragment(), WeatherContract.View {
         super.onViewCreated(view, savedInstanceState)
         presenter.onViewCreated()
 
-        binding.shareButton.setOnClickListener {
-            presenter.onShareButtonClicked()
+        with(binding) {
+            shareButton.setOnClickListener {
+                presenter.onShareButtonClicked()
+            }
+            retryButton.setOnClickListener {
+                presenter.onRetryButtonClicked()
+            }
         }
     }
 
@@ -86,11 +91,20 @@ class WeatherFragment : Fragment(), WeatherContract.View {
         with(binding) {
             progressBar.isVisible = false
             views.isVisible = false
-            error.isVisible = true
 
+            retryButton.isVisible = true
+            error.isVisible = true
             error.text = message ?: getString(R.string.connection_error)
         }
     }
+
+    override fun hideError() {
+        with(binding) {
+            error.isVisible = false
+            retryButton.isVisible = false
+        }
+    }
+
 
     override fun showProgressBar() {
         binding.views.isVisible = false
@@ -100,6 +114,10 @@ class WeatherFragment : Fragment(), WeatherContract.View {
     override fun hideProgressBar() {
         binding.views.isVisible = true
         binding.progressBar.isVisible = false
+    }
+
+    override fun reloadData() {
+        activity?.let { (it as MainActivity).presenter.readyToLoad() }
     }
 
     override fun openShareActivity(intent: Intent) {
