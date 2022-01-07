@@ -17,5 +17,4 @@ class WeatherRepositoryImpl(
     override fun getForecast(latitude: Double, longitude: Double): Observable<Forecast> {
         return apiService.getForecast(latitude, longitude)
     }
-
 }

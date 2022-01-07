@@ -1,12 +1,10 @@
 package com.yaromchikv.weatherapp.di.forecast
 
-import androidx.fragment.app.Fragment
 import com.yaromchikv.weatherapp.ui.forecast.ForecastContract
 import com.yaromchikv.weatherapp.ui.forecast.ForecastFragment
 import com.yaromchikv.weatherapp.ui.forecast.ForecastPresenter
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.FragmentComponent
 
@@ -19,5 +17,4 @@ abstract class ForecastModule {
 
     @Binds
     abstract fun bindPresenter(presenter: ForecastPresenter): ForecastContract.Presenter
-
 }

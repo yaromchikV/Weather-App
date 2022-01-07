@@ -46,7 +46,7 @@ dependencies {
     androidTestImplementation "org.jetbrains.kotlin:kotlin-test-junit:1.6.0"
     testImplementation 'junit:junit:4.12'
 
-    // Desugaring
+    // Desugar
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     // Dagger - Hilt

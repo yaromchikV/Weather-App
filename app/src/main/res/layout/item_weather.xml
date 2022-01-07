@@ -14,6 +14,7 @@
         android:layout_weight="1"
         android:padding="8dp"
         app:tint="@color/yellow"
+        tools:ignore="ContentDescription"
         tools:srcCompat="@drawable/icon_09d" />
 
     <LinearLayout
