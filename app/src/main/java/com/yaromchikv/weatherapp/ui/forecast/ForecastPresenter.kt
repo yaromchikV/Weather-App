@@ -29,18 +29,19 @@ class ForecastPresenter @Inject constructor(
                     .doOnSubscribe {
                         view.showProgressBar()
                     }
+                    .doFinally {
+                        view.hideProgressBar()
+                    }
                     .subscribe({ forecast ->
+                        view.updateToolbarTitle(it.data.locality)
                         val forecastWithHeaders =
                             convertForecastToListUseCase(forecast.forecastList)
-                        view.updateToolbarTitle(it.data.locality)
                         view.showForecast(forecastWithHeaders)
                         Timber.d("Getting forecast continues")
                     }, { error ->
-                        view.hideProgressBar()
                         view.showError(if (error !is UnknownHostException) error.localizedMessage else null)
                         Timber.d("Getting forecast error: ${error.localizedMessage}")
                     }, {
-                        view.hideProgressBar()
                         Timber.d("Getting forecast complete")
                     })
             }
@@ -48,6 +49,7 @@ class ForecastPresenter @Inject constructor(
                 view.showProgressBar()
             }
             is LocationState.Error -> {
+                view.hideProgressBar()
                 view.showError(it.message)
             }
             else -> Unit

@@ -52,7 +52,9 @@
         android:id="@+id/views"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:constraint_referenced_ids="weather_image, location, arrow, weather, divider_top, divider_bottom, share_button, humidity_icon, humidity_text, volume_icon, volume_text, pressure_icon, pressure_text, wind_speed_icon, wind_speed_text, wind_direction_icon, wind_speed_text" />
+        android:visibility="invisible"
+        app:constraint_referenced_ids="weather_image, location, arrow, weather, divider_top, divider_bottom, share_button, humidity_icon, humidity_text, volume_icon, volume_text, pressure_icon, pressure_text, wind_speed_icon, wind_speed_text, wind_direction_icon, wind_speed_text"
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/weather_image"

@@ -86,8 +86,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, ActivityListener {
         } else {
             Timber.i("Denied permission exception")
 
-            val message = getString(R.string.error_obtain_permission)
-            presenter.setLocation(LocationState.Error(message))
+            presenter.setLocation(LocationState.Error(getString(R.string.error_obtain_permission)))
             presenter.onUpdateLocation()
         }
     }
@@ -112,8 +111,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, ActivityListener {
                                 } else {
                                     Timber.i("Current location exception: ${task.exception}")
 
-                                    val message = getString(R.string.error_get_location)
-                                    presenter.setLocation(LocationState.Error(message))
+                                    presenter.setLocation(LocationState.Error(getString(R.string.error_get_location)))
                                     presenter.onUpdateLocation()
                                 }
                             }
@@ -122,8 +120,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, ActivityListener {
                     .addOnFailureListener {
                         Timber.i("Last location exception: $it")
 
-                        val message = getString(R.string.error_get_location)
-                        presenter.setLocation(LocationState.Error(message))
+                        presenter.setLocation(LocationState.Error(getString(R.string.error_get_location)))
                         presenter.onUpdateLocation()
                     }
             } else presenter.onGpsDisabled()
@@ -174,21 +171,25 @@ class MainActivity : AppCompatActivity(), MainContract.View, ActivityListener {
     }
 
     private fun setLocation(location: Location) {
-        val geocoder = Geocoder(this, Locale.getDefault())
-        val addresses: List<Address> =
-            geocoder.getFromLocation(location.latitude, location.longitude, 1)
+        try {
+            val geocoder = Geocoder(this, Locale.getDefault())
+            val addresses: List<Address> =
+                geocoder.getFromLocation(location.latitude, location.longitude, 1)
 
-        presenter.setLocation(
-            LocationState.Ready(
-                LocationModel(
-                    location.latitude,
-                    location.longitude,
-                    addresses[0].locality ?: getString(R.string.unknown),
-                    addresses[0].countryCode ?: getString(R.string.unknown)
+            presenter.setLocation(
+                LocationState.Ready(
+                    LocationModel(
+                        location.latitude,
+                        location.longitude,
+                        addresses[0].locality ?: getString(R.string.unknown),
+                        addresses[0].countryCode ?: getString(R.string.unknown)
+                    )
                 )
             )
-        )
-        presenter.onUpdateLocation()
+            presenter.onUpdateLocation()
+        } catch (e: Exception) {
+            presenter.setLocation(LocationState.Error(getString(R.string.connection_error)))
+        }
     }
 
     override fun updateFragment() {

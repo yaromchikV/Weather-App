@@ -83,6 +83,8 @@ class WeatherFragment : Fragment(), WeatherContract.View {
         val windDirection = getDirection(weather.wind.degrees)
 
         with(binding) {
+            views.isVisible = true
+
             this.weatherImage.setImageResource(weatherImage)
             this.location.text = location
             this.weather.text = weatherText
@@ -97,7 +99,6 @@ class WeatherFragment : Fragment(), WeatherContract.View {
 
     override fun showError(message: String?) {
         with(binding) {
-            progressBar.isVisible = false
             views.isVisible = false
 
             retryButton.isVisible = true
@@ -114,12 +115,13 @@ class WeatherFragment : Fragment(), WeatherContract.View {
     }
 
     override fun showProgressBar() {
-        binding.views.isVisible = false
-        binding.progressBar.isVisible = true
+        with(binding) {
+            views.isVisible = false
+            progressBar.isVisible = true
+        }
     }
 
     override fun hideProgressBar() {
-        binding.views.isVisible = true
         binding.progressBar.isVisible = false
     }
 

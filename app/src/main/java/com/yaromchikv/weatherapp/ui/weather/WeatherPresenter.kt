@@ -36,6 +36,9 @@ class WeatherPresenter @Inject constructor(
                     .doOnSubscribe {
                         view.showProgressBar()
                     }
+                    .doFinally {
+                        view.hideProgressBar()
+                    }
                     .subscribe({ weather ->
                         currentWeather = weather
                         view.showWeather(weather, it.data.locality, it.data.country)
@@ -44,7 +47,6 @@ class WeatherPresenter @Inject constructor(
                         view.showError(if (error !is UnknownHostException) error.localizedMessage else null)
                         Timber.d("Getting weather error: ${error.localizedMessage}")
                     }, {
-                        view.hideProgressBar()
                         Timber.d("Getting weather complete")
                     })
             }
@@ -53,6 +55,7 @@ class WeatherPresenter @Inject constructor(
             }
             is LocationState.Error -> {
                 currentLocation = null
+                view.hideProgressBar()
                 view.showError(it.message)
             }
             else -> Unit

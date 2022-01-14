@@ -58,19 +58,17 @@ class ForecastFragment : Fragment(), ForecastContract.View {
         binding.recyclerView.apply {
             adapter = forecastAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            //addItemDecoration(DividerItemDecoration(requireContext(), VERTICAL))
         }
     }
 
     override fun showForecast(forecastList: List<Any>) {
         forecastAdapter.submitList(forecastList)
+        binding.recyclerView.isVisible = true
     }
 
     override fun showError(message: String?) {
         with(binding) {
-            progressBar.isVisible = false
             recyclerView.isVisible = false
-
             retryButton.isVisible = true
             error.isVisible = true
             error.text = message ?: getString(R.string.connection_error)
@@ -79,7 +77,6 @@ class ForecastFragment : Fragment(), ForecastContract.View {
 
     override fun hideError() {
         with(binding) {
-            recyclerView.isVisible = true
             error.isVisible = false
             retryButton.isVisible = false
         }
