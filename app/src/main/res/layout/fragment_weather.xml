@@ -24,7 +24,7 @@
         android:padding="36dp"
         android:textAlignment="center"
         android:textSize="24sp"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:drawableTopCompat="@drawable/ic_error"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +42,7 @@
         android:textAllCaps="false"
         android:textColor="?attr/colorControlNormal"
         android:textSize="@dimen/button_text_size"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/error"
@@ -120,16 +120,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.helper.widget.Flow
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:constraint_referenced_ids="humidity_icon,volume_icon,pressure_icon,wind_speed_icon,wind_direction_icon"
+        app:flow_horizontalGap="80dp"
+        app:flow_horizontalStyle="packed"
+        app:flow_maxElementsWrap="3"
+        app:flow_verticalGap="52dp"
+        app:flow_wrapMode="chain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/divider_top" />
+
     <ImageView
         android:id="@+id/humidity_icon"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
-        android:layout_marginStart="64dp"
         android:padding="2dp"
-        app:layout_constraintEnd_toStartOf="@+id/volume_icon"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/volume_icon"
         app:srcCompat="@drawable/icon_humidity"
         app:tint="@color/yellow"
         tools:ignore="ContentDescription" />
@@ -146,10 +155,6 @@
         android:id="@+id/volume_icon"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
-        android:layout_marginTop="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/pressure_icon"
-        app:layout_constraintStart_toEndOf="@+id/humidity_icon"
-        app:layout_constraintTop_toBottomOf="@+id/divider_top"
         app:srcCompat="@drawable/icon_volume"
         app:tint="@color/yellow"
         tools:ignore="ContentDescription" />
@@ -166,10 +171,6 @@
         android:id="@+id/pressure_icon"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
-        android:layout_marginEnd="64dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/volume_icon"
-        app:layout_constraintTop_toTopOf="@+id/volume_icon"
         app:srcCompat="@drawable/icon_pressure"
         app:tint="@color/yellow"
         tools:ignore="ContentDescription" />
@@ -186,13 +187,11 @@
         android:id="@+id/wind_speed_icon"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/volume_icon"
-        app:layout_constraintStart_toEndOf="@+id/humidity_icon"
-        app:layout_constraintTop_toBottomOf="@+id/volume_text"
         app:srcCompat="@drawable/icon_wind_speed"
         app:tint="@color/yellow"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        tools:layout_editor_absoluteX="113dp"
+        tools:layout_editor_absoluteY="535dp" />
 
     <TextView
         android:id="@+id/wind_speed_text"
@@ -206,11 +205,7 @@
         android:id="@+id/wind_direction_icon"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
-        android:layout_marginTop="20dp"
         android:padding="2dp"
-        app:layout_constraintEnd_toStartOf="@+id/pressure_icon"
-        app:layout_constraintStart_toEndOf="@+id/volume_icon"
-        app:layout_constraintTop_toBottomOf="@+id/volume_text"
         app:srcCompat="@drawable/icon_wind_deg"
         app:tint="@color/yellow"
         tools:ignore="ContentDescription" />

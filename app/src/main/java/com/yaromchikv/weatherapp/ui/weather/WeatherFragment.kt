@@ -10,7 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.yaromchikv.weatherapp.R
 import com.yaromchikv.weatherapp.common.Utils.getDirection
-import com.yaromchikv.weatherapp.databinding.FragmentTodayBinding
+import com.yaromchikv.weatherapp.databinding.FragmentWeatherBinding
 import com.yaromchikv.weatherapp.domain.model.Weather
 import com.yaromchikv.weatherapp.ui.ActivityListener
 import com.yaromchikv.weatherapp.ui.common.LocationState
@@ -22,7 +22,7 @@ import kotlin.math.roundToInt
 @AndroidEntryPoint
 class WeatherFragment : Fragment(), WeatherContract.View {
 
-    private var _binding: FragmentTodayBinding? = null
+    private var _binding: FragmentWeatherBinding? = null
     private val binding get() = _binding!!
 
     @Inject
@@ -35,7 +35,7 @@ class WeatherFragment : Fragment(), WeatherContract.View {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTodayBinding.inflate(inflater, container, false)
+        _binding = FragmentWeatherBinding.inflate(inflater, container, false)
         return binding.root
     }
 

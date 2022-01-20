@@ -9,7 +9,7 @@
         android:id="@+id/navigation_today"
         android:name="com.yaromchikv.weatherapp.ui.weather.WeatherFragment"
         android:label="@string/today"
-        tools:layout="@layout/fragment_today" />
+        tools:layout="@layout/fragment_weather" />
 
     <fragment
         android:id="@+id/navigation_forecast"
