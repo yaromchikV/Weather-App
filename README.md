@@ -1,6 +1,6 @@
 # Weather App
 
-The application determines geolocation and shows the weather and forecast.
+The application finds geolocation and shows the weather and forecast.
 
 ## Images
 
