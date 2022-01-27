@@ -186,9 +186,10 @@ class MainActivity : AppCompatActivity(), MainContract.View, ActivityListener {
                     )
                 )
             )
-            presenter.onUpdateLocation()
         } catch (e: Exception) {
             presenter.setLocation(LocationState.Error(getString(R.string.connection_error)))
+        } finally {
+            presenter.onUpdateLocation()
         }
     }
 
